@@ -1,0 +1,24 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo REMINDER - Use the obsidian-vault-workflow skill now. Phase 1 before any work: name the topic, open the matching vault topic file and recent vault/Meeting Notes, then state what context you loaded."
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo REMINDER - Follow the obsidian-vault-workflow protocol for this request. Phase 1 before work: read the matching vault topic file and recent Meeting Notes. Phase 2 after work: append a dated session-log entry with status tag and wikilinks, and update the folder _index."
+          }
+        ]
+      }
+    ]
+  }
+}

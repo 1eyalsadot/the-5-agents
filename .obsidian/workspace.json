@@ -1,0 +1,222 @@
+{
+  "main": {
+    "id": "7fc6ee6560cbd965",
+    "type": "split",
+    "children": [
+      {
+        "id": "dad788789def8863",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c551a69664b212c1",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "4585c2492028407b",
+    "type": "split",
+    "children": [
+      {
+        "id": "8969182402247809",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6b735ca8b703a662",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "606d5e87beae12a0",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "b999053f8f2319b3",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "4fc4769e2dd9e9a8",
+    "type": "split",
+    "children": [
+      {
+        "id": "f391f3ade10196fd",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b74e2f5941110846",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "da3c3062f4131912",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "71f2aeda90120c67",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "c101220c5ea1e1dd",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "39c668ac1deb5a35",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "6b735ca8b703a662",
+  "lastOpenFiles": [
+    "vault/Content Briefs/israel-orthopedic-supports-market.md",
+    "vault/Content Briefs/israel-orthopedic-supports-market.md.tmp.18128.f891cc8959b8",
+    "Output/2026-06-11-israel-orthopedic-supports-market.html",
+    "Output/2026-06-11-israel-orthopedic-supports-market.html.tmp.18128.d6e3c43db283",
+    "Output/2026-06-11-israel-orthopedic-supports-market.md",
+    "Content/2026-06-11-israel-orthopedic-supports-market.md",
+    "Output PPTX/2026-06-11-smoke-test.pptx",
+    "CLAUDE.md.tmp.16352.5ecf978c4ca7",
+    "CLAUDE.md.tmp.16352.3ca4fe8c744e",
+    "CLAUDE.md.tmp.16352.d9ba65fbce4c",
+    "ariel/templates",
+    "ariel",
+    "Output PPTX",
+    "vault/Content Briefs/_index.md",
+    "vault/Content Briefs/israel-orthopedics-foot-market.md",
+    "yuval/outputs/2026-06-10-israel-foot-anatomy.png",
+    "yuval/outputs/2026-06-10-israel-diabetic-insole.png",
+    "yuval/outputs/2026-06-10-israel-ortho-hero.png",
+    "yuval/outputs/2026-06-10-israel-ortho-robotic.png",
+    "Output/2026-06-10-israel-orthopedics-market.md",
+    "vault/Meeting Notes/file-docs-vault.md",
+    "vault/Meeting Notes/_index.md",
+    "vault/File Docs/Content/content-israel-orthopedics.md",
+    "Content/2026-06-10-israel-orthopedics-market.md",
+    "vault/File Docs/Bundled Skills/sp-writing-skills-render-graphs.md",
+    "vault/File Docs/Bundled Skills/sp-writing-skills-graphviz.md",
+    "vault/File Docs/Bundled Skills/sp-writing-skills-claude-md-testing.md",
+    "vault/File Docs/Bundled Skills/sp-writing-skills-testing-subagents.md",
+    "vault/File Docs/Bundled Skills/sp-writing-skills-persuasion.md",
+    "vault/File Docs/Bundled Skills/sp-writing-skills-best-practices.md",
+    "vault/File Docs/Bundled Skills/sp-writing-plans-reviewer.md",
+    "vault/File Docs/Bundled Skills/sp-superpowers-gemini-tools.md",
+    "vault/File Docs/Bundled Skills/sp-superpowers-copilot-tools.md",
+    "vault/File Docs/Bundled Skills/sp-superpowers-codex-tools.md",
+    "vault/File Docs/Bundled Skills/sp-tdd-anti-patterns.md",
+    "vault/File Docs/Bundled Skills/sp-sysdebug-test-pressure-3.md",
+    "vault/File Docs/Bundled Skills/sp-sysdebug-test-pressure-2.md",
+    "vault/File Docs/Bundled Skills/sp-sysdebug-test-pressure-1.md",
+    "vault/File Docs/Bundled Skills/sp-sysdebug-test-academic.md",
+    "vault/File Docs/Bundled Skills/sp-sysdebug-creation-log.md"
+  ]
+}
