@@ -27,3 +27,9 @@
   - PowerPoint COM דורש **נתיבים מוחלטים** (`SaveAs(dst, 32)`, 32=ppSaveAsPDF).
   - ה-PATH ברמת המשתמש מעדיף את ה-python האמיתי על-פני ה-stub של WindowsApps — שלים חדשים יפתרו `python` נכון.
 - **Related:** [[agent-ariel]], [[agent-yuval]], [[agent-yael]], [[agent-chen]], [[file-CLAUDE]], [[skill-gpt-image-gen]], [[file-docs-vault]]
+
+### 2026-06-11 — בדיקת קצה-לקצה על תוכן אמיתי [shipped]
+- **What was done:** הורץ ה-pipeline המלא על קובץ דמו `Content PPTX/2026-06-11-demo-market-snapshot.md` (תוכן + טבלת נתונים). נבנה דק בן 4 שקופיות (שער, מגמות, גרף עמודות native, טבלה מעוצבת) עם החלת פלטת ה-style-guide, ויוצא ל-PDF דרך PowerPoint COM. תוצרים ב-`Output PPTX/` (pptx 38KB + pdf 135KB).
+- **Decisions:** נשמר הדמו ב-repo כדוגמת-עבודה לאריאל (אפשר למחוק אם לא רצוי).
+- **Notes / Caveats:** אומת end-to-end (לא רק חלקי מנוע בנפרד). RTL + יישור לימין הוחלו ידנית per-shape. הקומיט הקודם c899934 סגר את כל העבודה שנצברה.
+- **Related:** [[agent-ariel]]

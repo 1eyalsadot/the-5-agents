@@ -9,6 +9,12 @@
 
 ## Session Log
 
+### 2026-06-13 — אימות זרימת רחל מקצה-לקצה [verified]
+- **What was done:** הותקנו `pandas 3.0.3` / `matplotlib 3.11.0` / `openpyxl 3.1.5` (Python 3.12.10). נוצר קובץ דוגמה `Planning_Data/2026-06-13-regional-sales.xlsx` (מכירות רבעוניות, 5 אזורים), והורץ הפייפליין של רחל: קריאה → חישוב Total+Growth → 2 גרפים PNG + xlsx מעובד + דוח MD ב-`Planning_Output/`.
+- **Decisions:** הפייפליין הורץ **ישירות** (לא דרך spawn של הסוכנת) כי `rachel` עדיין לא רשומה כסוכנת בת-הפעלה בסשן — נדרש restart כדי שתופיע ב-Agent registry.
+- **Notes / Caveats:** אומת ש-4/4 הקבצים נוצרו עם size>0 והמספרים נכונים (East=644K, צמיחת Central=63%, סך=₪2,256,000). אחרי restart מומלץ לחזור על המבחן דרך הפעלת הסוכנת עצמה כדי לאמת ניתוב + frontmatter.
+- **Related:** [[agent-rachel]], [[rachel-workspace-index]]
+
 ### 2026-06-13 — הוספת רחל, אנליסטית הנתונים [shipped]
 - **What was done:** נוצרה סוכנת חמישית **רחל** — אנליסטית נתונים. קובץ הגדרה `.claude/agents/rachel.md` (כלים: Read/Write/Edit/Bash/Glob/Skill, סקיל `xlsx`), שתי תיקיות עבודה `Planning_Data/` (קלט) ו-`Planning_Output/` (פלט: גרפים PNG + xlsx מעובד + דוח MD), כל אחת עם `.gitkeep`. עודכן [[file-CLAUDE]] (ראובן): פסקת צוות + ניתוב, סעיף "תהליך: ניתוח נתונים", ומבנה התיקיות. עודכן [[agent-ariel]] שרשאי למשוך גרפים/טבלאות מ-`Planning_Output/` למצגות. תועד בכספת: [[agent-rachel]], [[rachel-workspace-index]] + [[planning-data-gitkeep]]/[[planning-output-gitkeep]], ועודכנו [[agents-index]] ו-[[file-docs-vault]].
 - **Decisions:** (1) המשתמש ביקש **בלי המרת שערי מטבעות** — רחל עובדת אך ורק עם המספרים שבקובץ. (2) שם תיקיית הפלט תוקן ל-`Planning_Output` (במקום `Planing_Output`). (3) תוצר משולש: PNG + xlsx + דוח MD, כדי שאריאל יוכל לשבץ גרפים ישירות במצגת. (4) רחל בלי גישה לרשת — מקבלת את הנתונים בקובץ.
