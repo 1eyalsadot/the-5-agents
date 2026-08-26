@@ -1,0 +1,35 @@
+Source: real photo edit (not text-to-image generation), converted from user-supplied HEIC to PNG at:
+/tmp/claude-0/-home-user-the-5-agents/104e019b-481e-5835-b5aa-7854a99e3b07/scratchpad/uriel_photo/original.png (5712x4284, RGB)
+
+NOTE: The red digital-pencil markings mentioned by the requester were NOT present in the delivered PNG
+(verified visually and by pixel-level red-color scan across the full image — only pre-existing red
+elements found were the "no entry" traffic sign, the fire hydrant pipes, and the painted curb; no
+circles/annotations were detected). The three edit regions below were instead identified directly from
+the requester's precise textual description, matched unambiguously to real elements in the photo
+(confirmed via zoomed crops + a coordinate grid overlay). This discrepancy was flagged back to Reuven.
+
+API: OpenAI Images API, POST /v1/images/edits
+Model: gpt-image-2 (per project convention — do not substitute)
+Params: size=auto (API returned 1448x1086), quality=high, output_format=png
+Inputs: image = building photo downscaled to 1536x1152 (4:3, preserves original aspect ratio)
+        mask = matching 1536x1152 RGBA mask; alpha=0 (edit) over the two window-row rectangles,
+               the light-pole shaft+lamp head, and the two bollard clusters at the bottom of the frame;
+               alpha=255 (preserve) everywhere else; edges feathered (Gaussian blur, radius 18px at
+               full original resolution) for a seamless blend.
+
+Prompt sent to the API:
+"Photorealistic architectural photo retouch of this exact building facade photo. Keep the entire
+building, camera angle, lighting, sky, trees, cars, gate, and every other detail EXACTLY the same as
+the original photo. Only edit the masked (transparent) regions: 1) In the two marked window rows on
+the rust-brown metal facade, replace the glass with clean, clear, transparent glazing like the other
+undamaged windows on the building (matching mullions, subtle reflections of sky) - remove the red 'For
+Rent' sign/paper and any stains or curtains behind the glass, so it reads as an ordinary clean window.
+2) Completely remove the tall street light pole (pole and lamp head) on the right side of the building,
+seamlessly filling in the sky and the dark facade/glass railing behind it as if the pole was never
+there. 3) Completely remove the concrete/metal bollards near the entrance and near the curb at the
+bottom of the frame, seamlessly filling in the pavement, curb, and sidewalk texture behind them as if
+they were never there. Do not add or change anything else in the image. Maintain a photorealistic,
+natural, high quality architectural photography look, consistent lighting and color grading with the
+rest of the photo."
+
+Output: 1448x1086 PNG (model's returned resolution; not upscaled further to avoid artificial blur).
