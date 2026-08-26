@@ -1,0 +1,64 @@
+Source: follow-up edit of yuval/outputs/2026-08-26-uriel-building-photo-edited.png
+(itself an edit of the original URIEL / Herman Zemel building photo).
+
+Change requested: at the building entrance, next to the concrete pole and the green
+plant, two flagpoles stand close together with two small flags that were hanging
+limp/flat against their poles (barely recognizable). Improve visibility of the
+flag on the taller, right-hand (closer-to-camera) pole so it clearly reads as the
+flag of Israel (white field, horizontal blue stripe near top, horizontal blue
+stripe near bottom, blue Star of David centered), rendered as if gently waving in
+a light breeze rather than stuck to the pole like a rag. Keep the second (left,
+further-back) flag's existing white/blue color scheme, improving only how it
+waves, without inventing a new design/colors for it.
+
+API: OpenAI Images API, POST /v1/images/edits
+Model: gpt-image-2 (per project convention — do not substitute)
+Params: size=auto (API returned 1448x1086, matching the source image's exact
+        canvas/aspect ratio — an earlier attempt with an explicit size=1536x1024
+        was discarded because it changed the aspect ratio from 4:3 to 3:2 and
+        reframed the whole photo, which is not acceptable), quality=high,
+        output_format=png
+Inputs: image = source PNG (yuval/outputs/2026-08-26-uriel-building-photo-edited.png),
+        unmodified RGB, 1448x1086.
+        mask = matching 1448x1086 RGBA PNG; alpha=0 (edit) over a single rectangle
+               (695,635)-(825,775) tightly covering just the two flag/flagpole tops
+               near the entrance; alpha=255 (preserve) everywhere else; edges
+               feathered (Gaussian blur, radius 10px) for a seamless blend. No other
+               region of the image (building, windows, signage, gate, hydrant, wall,
+               curb, sky, trees, cars) was included in the editable mask area.
+
+Prompt sent to the API:
+"Photorealistic architectural photo retouch of this exact building entrance photo.
+Keep everything outside the masked region EXACTLY the same: the building facade,
+windows, signage, gate, concrete entrance wall, hydrant pipes, curb, sky, trees,
+cars, and all other details must remain untouched, same lighting and color
+grading, same framing and camera angle. Only edit the masked (transparent)
+region, which contains two flagpoles standing side by side near the concrete
+entrance wall, each currently showing a small flag hanging limp and flat against
+its pole. Redraw both flags as real fabric flags gently rippling and unfurled in
+a light breeze, with soft natural folds, clearly extended away from the pole (not
+flat/wrapped around the pole), still properly attached at the pole-side edge
+(hoist), same size and position as the original small flags, on the same silver
+flagpoles (do not change the poles). The flag on the taller, right-hand flagpole
+(closer to camera) must be a clear, accurate flag of Israel: white rectangular
+field, one horizontal medium-blue stripe near the top edge, one horizontal
+medium-blue stripe near the bottom edge, and a medium-blue six-pointed Star of
+David centered between the two stripes, correct proportions like a real Israeli
+flag. The flag on the shorter, left-hand flagpole (slightly further back) should
+keep the same white-and-blue color scheme and pattern already visible in the
+current photo, unchanged in design and color, just rendered rippling naturally in
+the breeze instead of limp. Photorealistic, sharp, natural sunlight consistent
+with the rest of the photo. Do not add or change anything else in the image."
+
+Output: 1448x1086 PNG (matches source exactly, same as input canvas — verified by
+        pixel diff against the source image outside the mask region: mean diff
+        ~4.8/255, confined to normal PNG re-encoding noise; visually identical
+        outside the flag area).
+
+Result: right-hand pole now shows a clearly recognizable, correctly proportioned
+Israeli flag (white/blue stripes + blue Star of David), waving naturally. The
+left-hand pole's flag keeps its white/blue coloring, also rendered waving instead
+of limp. Its exact emblem could not be confirmed from the source (too small/blurry
+in the original photo to identify a specific company or other flag), so it was
+regenerated with a plausible blue-and-white banner design consistent with what was
+visible; this was flagged as an assumption rather than a verified match.
