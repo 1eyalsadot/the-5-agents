@@ -1,0 +1,138 @@
+Source: follow-up edit of yuval/outputs/2026-08-26-uriel-building-photo-edited-v5.png
+(itself an edit of v4.png, itself an edit of v3.png, itself an edit of v2.png, itself
+an edit of 2026-08-26-uriel-building-photo-edited.png, itself an edit of the original
+URIEL / Herman Zemel building photo).
+
+Change requested: remove the smaller/left Israeli flag ENTIRELY - both the flag cloth
+and its own flagpole, completely (not just shortening the pole as in v4/v5, but
+eliminating the whole flag+pole assembly from its base near the pavement up to its
+tip). The larger/right Israeli flag and its flagpole must remain completely
+unchanged. No other part of the image (facade, windows, signage, gate, entrance wall,
+hydrant, curb, sky, trees, cars) may be touched.
+
+Investigation before editing (pixel-level, on the 1448x1086 canvas of v5, Python/PIL
+raw RGB sampling + multiple zoomed crops with coordinate-grid overlays):
+- Smaller/left flag cloth: hoist (pole) edge at x~743-748, top edge (first blue
+  stripe pixels) at y~615-620, fly tip (widest point in the wind) reaching to about
+  x=794-796 at y~640-650, bottom edge at y~678-683. Confirmed the flag's fly tip
+  comes close to, but does not touch, the larger/right flagpole (whose left edge
+  starts at approx. x=799-802 at multiple sampled rows y=615/630/645) - a real but
+  narrow ~3-6px gap between them.
+- Left flagpole, upper segment: not visibly rendered against the brown facade between
+  the flag's bottom edge (~y=683) and a dark horizontal shadow band (~y=725-745) -
+  i.e. no distinct pole pixels found there on inspection; treated as part of the
+  removable strip regardless, to be reconstructed as plain facade/shadow band.
+- Left flagpole, lower/visible segment: clearly visible as a thin gray column
+  centered at x~718-722 (width ~10-14px), continuously from just below the dark
+  shadow band (y~745) down to about y=846-848, where it becomes obscured by the gray
+  utility box and the red fire hydrant next to it (pixel sampling confirmed the wall
+  area at x=710-716 stays clean cream/tan up to y~846, then the utility box's dark
+  tones and the hydrant appear from y~848-850 onward) - used y=848 as the safe lower
+  cutoff of the mask, since the pole is already visually obscured by other foreground
+  objects beyond that point.
+- Right/larger flagpole and flag: confirmed at x~793/799-806+, well clear of the
+  masked strip at every sampled row; left fully untouched throughout.
+
+API: OpenAI Images API, POST /v1/images/edits
+Model: gpt-image-2 (per project convention - do not substitute)
+Params: size=auto (API returned 1448x1086, exactly matching the source canvas - same
+        approach as prior edits, no reframing/aspect-ratio change), quality=high,
+        output_format=png
+Inputs: image = source PNG (yuval/outputs/2026-08-26-uriel-building-photo-edited-v5.png),
+        unmodified RGB, 1448x1086.
+        mask = matching 1448x1086 RGBA PNG (mask_v6.png); alpha=0 (edit) over ONE
+               tapered vertical region following the exact path of the smaller/left
+               flag + its pole, alpha=255 (preserve) everywhere else, edges feathered
+               (Gaussian blur, radius 2px, kept small given how narrow the region is)
+               for a seamless blend. The mask was built as a single polygon with
+               control points (y, x_left, x_right), widest through the flag-cloth
+               zone and narrow through the pole zones above/below it:
+               (605,736,749) (615,736,753) (625,735,768) (635,735,783) (645,735,794)
+               (655,735,790) (665,735,778) (675,735,760) (685,705,750) (695,705,745)
+               (710,706,740) (725,707,736) (745,708,733) (760,710,731) (780,712,729)
+               (800,713,728) (820,713,727) (848,712,727)
+               - i.e. from the flag/pole tip near the window (y=605) down through the
+               full flag silhouette, tapering into the narrower facade/shadow-band gap
+               zone, then into the narrow lower pole zone, stopping at y=848 (just
+               above where the pole is naturally obscured by the utility box/hydrant).
+        No other region (the larger/right flag and its flagpole in full, both
+        windows, the URIEL/HERMAN ZEMEL signage, the rest of the facade, gate,
+        entrance wall, gray utility box, red fire hydrant, metal vent grille, curb,
+        sidewalk pavers, sky, trees, and the parked cars) was included in the
+        editable mask area. Mask placement was verified beforehand via a
+        semi-transparent red overlay preview over the source image before sending
+        the request (crop saved for review during the session).
+
+Prompt sent to the API:
+"Photorealistic architectural photo retouch of this exact building entrance photo.
+Keep everything outside the masked (transparent) region EXACTLY the same: the
+building facade and all its panel seams, both windows and their frames/mullions, the
+URIEL and HERMAN ZEMEL signage, the larger/right Israeli flag and its flagpole in
+their entirety (including its cap, exactly where they currently are, unchanged in
+shape, color, position and height), the gate, entrance wall, the gray utility box,
+the red fire hydrant, the metal vent grille, curb, sidewalk pavers, sky, trees, and
+the parked cars - every other detail must remain untouched, same lighting, color
+grading, framing and camera angle.
+
+The masked (transparent) region is a single narrow vertical strip that follows the
+smaller/left Israeli flag and its own flagpole from top to bottom: starting at the
+top where the flag and pole tip currently are (against the window glass and brown
+facade), continuing down through the flag cloth itself, then down through the brown
+facade panelling behind where the pole continues, through the dark horizontal shadow
+band, and down through the light-colored entrance wall to where the thin pole
+currently ends near the ground next to the utility box.
+
+Completely remove the smaller/left Israeli flag (all of its white and blue cloth,
+including the Star of David emblem) and completely remove its entire flagpole (the
+full pole, from its base near the ground up to its tip) - both must be fully gone,
+with no stump, no fragment of pole, no shadow, no discoloration, and no trace of the
+flag or pole left anywhere in the masked strip.
+
+Fill the masked strip with a photorealistic, seamless continuation of whatever would
+naturally be behind it at each height, matching exactly what is immediately to the
+left and right of the strip at that same height:
+- Where the strip overlaps the window glass near the top: continue the light
+  gray-blue window glass and its dark mullion/frame seamlessly.
+- Where the strip overlaps the brown metal facade panelling (upper and middle area):
+  continue the warm brown rain-screen panelling with the same vertical panel seams,
+  rhythm, perspective, and subtle brushed-metal texture as the panels immediately
+  beside it.
+- Where the strip overlaps the dark horizontal shadow band under the facade:
+  continue that same plain dark band with no interruption.
+- Where the strip overlaps the light-colored entrance wall lower down: continue the
+  same plain light wall texture and coloring as the wall immediately to the left and
+  right of it, ending naturally at the sidewalk/curb level.
+
+The result must look completely plain and uninterrupted in this strip at every
+height, as if the smaller flag and its pole never existed there. Do not shorten,
+move, resize, duplicate, or otherwise alter the larger/right Israeli flag or its
+flagpole outside this masked strip. Do not add any new object. Do not add, remove,
+or change anything else in the image."
+
+Output: 1448x1086 PNG (matches source exactly). Verified by:
+        - Full-frame visual review of v6: the smaller/left Israeli flag and its pole
+          are completely gone; only the larger/right flag (with its own pole, cap,
+          full height and position) remains, unchanged from v5.
+        - Zoomed crop comparison of the edited zone: the window glass/mullion,
+          brown facade panelling and its seams, the dark shadow band, and the
+          light-colored entrance wall all read as clean and continuous where the
+          flag and pole used to be - no stump, no shadow, no discoloration, no
+          leftover fragment.
+        - Zoomed side-by-side crop (v5 vs v6) of the right flag/pole, gray utility
+          box and facade behind it: pixel-identical in position, shape and color
+          (only normal PNG re-encoding noise).
+        - Pixel diff (v5 vs v6) outside the mask bounding box: mean abs diff
+          ~11.4/765, in line with prior edits' normal PNG re-encoding noise (v4->v5
+          was ~10.4/765); the diff is spread as fine, low-level grain across the
+          whole frame (tree foliage detail, road/curb texture, etc.), not localized
+          to any single element - side-by-side crops of the tree/gate/cars area and
+          of the right flag/pole/facade area confirm both are structurally
+          unchanged.
+        - Full-frame review of v6: building facade, both windows, URIEL/HERMAN ZEMEL
+          signage, gate, entrance wall, gray utility box, hydrant, vent grille,
+          curb, sky, tree, and parked cars all intact and unchanged from v5.
+
+Result: The smaller/left Israeli flag and its entire flagpole (base to tip) have
+been completely removed from the photo. Only the larger/right Israeli flag and its
+flagpole remain, exactly as they were in v5. All other elements of the building and
+scene are unchanged.
