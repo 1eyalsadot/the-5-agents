@@ -1,0 +1,93 @@
+Source: follow-up edit of yuval/outputs/2026-08-26-uriel-building-photo-edited-v3.png
+(itself an edit of v2.png, itself an edit of 2026-08-26-uriel-building-photo-edited.png,
+itself an edit of the original URIEL / Herman Zemel building photo).
+
+Change requested (user-marked with a red circle on the photo):
+The user circled a point on the brown facade, roughly at second-floor window height,
+directly above the two Israeli flags — above the height where the taller flagpole
+(the one holding the larger Israeli flag) currently ends — and asked to "shorten the
+pole" (לקצר את העמוד) so it does not stick out/protrude so high above the flags
+against the building backdrop.
+
+Investigation before editing: the exact current top of the taller flagpole and the
+brown facade area directly above it (x approx. 780-850, y approx. 180-590 on the
+1448x1086 canvas) were inspected pixel-by-pixel (color-channel diff sampling on the
+raw RGB array, plus multiple zoomed crops with a coordinate grid overlay) to find
+precisely where the pole/any thin vertical line currently ends before editing, and to
+make sure the mask would not touch the flags, the windows above (bottom edge of the
+upper window reaches about y=345-350, its right edge reaches about x=800 at most), or
+any other element.
+
+API: OpenAI Images API, POST /v1/images/edits
+Model: gpt-image-2 (per project convention — do not substitute)
+Params: size=auto (API returned 1448x1086, exactly matching the source canvas — same
+        approach as prior edits, to avoid any reframing/aspect-ratio change),
+        quality=high, output_format=png
+Inputs: image = source PNG (yuval/outputs/2026-08-26-uriel-building-photo-edited-v3.png),
+        unmodified RGB, 1448x1086.
+        mask = matching 1448x1086 RGBA PNG; alpha=0 (edit) over ONE narrow region,
+               alpha=255 (preserve) everywhere else, edges feathered (Gaussian blur,
+               radius 9px) for a seamless blend:
+               - Single editable region: a narrow vertical strip on the brown facade,
+                 bounding box x:806-840, y:358-588 (before feathering) — positioned
+                 directly above the taller flagpole/large Israeli flag, clear of the
+                 window above (window bottom/right edge stays below/left of this box)
+                 and clear of the flag fabric, the pole, and its cap below (which
+                 currently sit at approx. y=583-590 and were left untouched, starting
+                 just below the mask's lower edge).
+        No other region (both flags and both flagpoles in full, both windows, the
+        URIEL/HERMAN ZEMEL signage, the rest of the facade, gate, entrance wall,
+        hydrant, curb, sky, trees, parked cars) was included in the editable mask
+        area. Mask placement was verified beforehand via a semi-transparent red
+        overlay preview over the source image before sending the request.
+
+Prompt sent to the API:
+"Photorealistic architectural photo retouch of this exact building entrance photo.
+Keep everything outside the masked (transparent) region EXACTLY the same: the
+building facade and all its panel seams, both windows, the URIEL and HERMAN ZEMEL
+signage, both Israeli flags and both flagpoles in their entirety (including the pole
+tip/cap of the taller flagpole, right where it currently is, just above the flag),
+the gate, entrance wall, hydrant, curb, sky, trees, and the parked cars — every other
+detail must remain untouched, same lighting, color grading, framing and camera angle.
+The masked (transparent) region is a narrow vertical strip on the brown metal facade
+panelling, directly above the taller flagpole (the one with the large Israeli flag),
+roughly at second-floor window height, well above the current top of that flagpole.
+If any thin vertical pole, rod, or line segment appears in this masked strip, remove
+it completely. Fill the entire masked strip with a photorealistic continuation of the
+brown rain-screen facade panelling exactly matching the surrounding cladding: same
+warm brown color, same vertical panel seams/joints continuing in the same rhythm and
+slight perspective convergence as the panels immediately to the left and right of the
+strip, same subtle brushed-metal texture, same lighting and shading gradient. The wall
+in this area must look completely plain and uninterrupted, as if no pole or object was
+ever there — no stump, no shadow, no discoloration. Do not extend the flagpole, do not
+add any new object, do not change the flag, the pole below it, or any window. Do not
+add, remove, or change anything else in the image."
+
+Output: 1448x1086 PNG (matches source exactly). Verified by:
+        - Pixel diff against v3 outside the mask area: mean diff ~3.49/255 (normal PNG
+          re-encoding noise, in line with the v2/v3 edits' ~3.7-4.8/255), diff map shows
+          only thin edge-outline noise scattered across the whole photo (typical
+          re-encoding artifact), no localized unwanted change blob anywhere.
+        - Side-by-side crop comparison (v3 vs v4) of the flags/poles area: both flags
+          and both flagpoles are pixel-identical in position/appearance, fully
+          untouched.
+        - Side-by-side crop comparison of the edited strip: blends naturally into the
+          surrounding brown facade panelling, no visible seam, patch, or artifact.
+
+Result: The strip of brown facade directly above the taller flagpole (second-floor
+height, above the flags) is now guaranteed clean, plain panelling with no stray pole
+or line segment reaching up from the flag area. The taller flagpole itself, its cap,
+and both flags were left completely untouched, ending at their original height just
+above the flags — nothing was found or left protruding higher up the wall after this
+edit.
+
+Note for review: a pixel-level inspection of the source (v3) facade in this area
+before editing did not find a distinct high-contrast pole/line reaching up to
+second-floor height (the visible pole/cap already terminated close to the top of the
+flag fabric, ~y=583-590). This edit was still executed exactly as requested, targeting
+precisely the area described (the brown wall above the flags, at second-floor height),
+to guarantee no such artifact remains and to give a clean result to review. If, after
+reviewing v4, the pole/flag height itself (not just the wall above it) still needs to
+be visually shortened, that would require a follow-up edit directly on the pole/flag
+region itself (currently intentionally left untouched here) — flag the exact spot again
+and we will target that precisely.
