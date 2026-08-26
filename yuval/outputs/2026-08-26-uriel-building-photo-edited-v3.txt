@@ -1,0 +1,82 @@
+Source: follow-up edit of yuval/outputs/2026-08-26-uriel-building-photo-edited-v2.png
+(itself an edit of yuval/outputs/2026-08-26-uriel-building-photo-edited.png, itself an
+edit of the original URIEL / Herman Zemel building photo).
+
+Change requested (2 fixes, user-marked on v2):
+1) Remove the red-and-white circular "no entry" traffic sign (with its pole) on the left
+   side of the photo, near the trunk of the large tree, above the parked cars, roughly at
+   the height of the green rounded sign post in the foreground. Inpaint the background
+   naturally in its place (expected to be tree leaves and/or the light-colored perimeter
+   wall/fence behind it).
+2) Flag #2 (the left, shorter/further-back flag near the entrance, which in the v2 edit
+   had received a guessed white/blue design) must be replaced with a flag identical to
+   flag #1 (flag of Israel — white field, two horizontal blue stripes, blue Star of David
+   centered), just at a smaller scale, same waving direction as the larger flag. Do not
+   invent any other design/logo.
+
+API: OpenAI Images API, POST /v1/images/edits
+Model: gpt-image-2 (per project convention — do not substitute)
+Params: size=auto (API returned 1448x1086, exactly matching the source canvas/aspect
+        ratio — same lesson as the v2 edit: an explicit size like 1536x1024 would change
+        the aspect ratio and reframe the photo, so size=auto was used again), quality=high,
+        output_format=png
+Inputs: image = source PNG (yuval/outputs/2026-08-26-uriel-building-photo-edited-v2.png),
+        unmodified RGB, 1448x1086.
+        mask = matching 1448x1086 RGBA PNG; alpha=0 (edit) over two separate regions,
+               alpha=255 (preserve) everywhere else, edges feathered (Gaussian blur,
+               radius 9px) for a seamless blend:
+               - Region 1 ("no entry" sign + pole): an ellipse covering the sign disc
+                 (bounding box approx x:158-250, y:735-818) plus a vertical strip covering
+                 its pole (x:196-215, y:705-912), pixel-located via a coordinate grid
+                 overlay on zoomed crops of the source image.
+               - Region 2 (flag #2 / left flag): rectangle x:733-800, y:600-808, pixel-
+                 located the same way; deliberately stopped at x=800 (right at flag #2's
+                 own pole) to avoid any overlap with flag #1 / its pole / its fabric, which
+                 start immediately to the right and had to stay completely untouched.
+        No other region of the image (building, windows, signage, gate, hydrant, curb,
+        sky, trees, cars, right-hand Israeli flag and its pole) was included in the
+        editable mask area. Mask placement was verified beforehand via a semi-transparent
+        red overlay preview over the source image before sending the request.
+
+Prompt sent to the API:
+"Photorealistic architectural photo retouch of this exact building entrance photo. Keep
+everything outside the masked (transparent) regions EXACTLY the same: the building
+facade, windows, signage, gate, entrance wall, hydrant, curb, sky, trees, the parked
+cars, the right-hand flag and flagpole (which already correctly shows the flag of
+Israel), and every other detail must remain untouched, same lighting, color grading,
+framing and camera angle. Only edit the masked (transparent) regions, which are exactly
+two separate areas: REGION 1 (near the tree, above the parked cars, on the left side of
+the photo): a red-and-white circular 'no entry' traffic sign mounted on a thin metal
+pole. Completely remove this sign and its pole. Fill the area naturally with what would
+realistically be behind it: tree leaves/branches at the top (matching the surrounding
+tree canopy), and, lower down, the light-colored perimeter fence/wall and the top of the
+parked silver car exactly as they would continue uninterrupted if the sign and pole were
+never there. Do not leave any trace of the sign, pole, or a stump. REGION 2 (the shorter,
+further-back flagpole near the building entrance, to the left of the taller flagpole that
+already shows a correct Israeli flag): replace the current flag design on this pole with
+a flag of Israel identical in design to the flag on the neighboring taller pole: white
+rectangular field, one horizontal medium-blue stripe near the top edge, one horizontal
+medium-blue stripe near the bottom edge, and a medium-blue six-pointed Star of David
+centered between the two stripes, correct real proportions. Render it at a smaller scale
+than the neighboring Israeli flag (this pole and flag are smaller/shorter), gently
+rippling and unfurled in the same light breeze and same waving direction as the
+neighboring flag, with soft natural folds, properly attached at the pole-side edge
+(hoist), on the same silver flagpole (do not change the pole itself). Photorealistic,
+sharp, natural sunlight consistent with the rest of the photo. Do not add, remove, or
+change anything else in the image."
+
+Output: 1448x1086 PNG (matches source exactly). Verified by pixel diff against the source
+        image within the strictly-preserved (unfeathered) mask area: mean diff ~3.7/255
+        (normal PNG re-encoding noise, in line with the v2 edit's ~4.8/255), with no
+        localized unwanted changes found on visual inspection of the building, windows,
+        gate, cars, sky, trees, curb, and the right-hand Israeli flag/pole.
+
+Result:
+1) The "no entry" sign and its pole are completely gone; the area now shows tree
+   leaves/branches at the top and the perimeter fence plus the top of the parked silver
+   car below, blending naturally with the surrounding, untouched parts of those same
+   elements.
+2) Flag #2 (left, shorter pole) now clearly shows the flag of Israel — white field, two
+   horizontal blue stripes, blue Star of David centered — rendered at a smaller scale
+   than flag #1 and waving in the same direction/style, on the same silver pole. Flag #1
+   and its pole were left completely untouched.
