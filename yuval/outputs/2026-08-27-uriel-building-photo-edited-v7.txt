@@ -1,0 +1,135 @@
+Source: follow-up edit of yuval/outputs/2026-08-26-uriel-building-photo-edited-v6.png
+(itself an edit of v5.png, v4.png, v3.png, v2.png, and the original
+2026-08-26-uriel-building-photo-edited.png, itself an edit of the original URIEL /
+Herman Zemel building photo). v6 already has a single Israeli flag (no second/smaller
+flag), no traffic sign, no protruding pillar.
+
+Change requested (from user-annotated screenshots, description only - no marked-up
+file was provided, only a precise verbal description of two red-circled defects plus
+one X-marked wall-tone issue):
+1. Remove two objects circled in red near the ground by the entrance concrete wall,
+   next to the flag poles:
+   - A red-and-blue fire-hydrant/standpipe assembly (blue vertical pipe, dark vertical
+     pipe, red H-shaped pipe with dark valve caps, on a base near the pavement).
+   - A small wall-mounted fitting just above/beside it: two small square outlet plates
+     with a small round gauge between them, mounted directly on the concrete wall.
+2. Correct an uneven/mismatched gray tone (marked with X) on a section of the concrete
+   boundary wall - the second wall segment to the right of the entrance (between the
+   light cream entrance pillar and the wall's continuation toward the trees) - so its
+   tone matches the uniform light warm-gray of the rest of the same wall.
+
+Investigation before editing (pixel-level, on the 1448x1086 canvas of v6, Python/PIL
+raw RGB sampling + multiple zoomed crops):
+- Fire hydrant/standpipe assembly: located via red/blue color-channel thresholding.
+  Red pipe pixels bbox: x=644-703, y=834-892. Blue pipe pixels bbox: x=659-662,
+  y=855-886. Full cluster (pipes + valve caps + base + a thin dark
+  conduit/drain strip immediately to its right) visually confirmed at x~647-719,
+  y~826-900, mounted on the light cream entrance-box wall, left of the metal vent
+  grille (grille starts at x~722) and right of the fence gate (gate ends at x~649).
+- Small wall-mounted plate/gauge fitting: two pale square plates + a small dark gauge
+  between them, directly above the hydrant assembly, at x~665-720, y~821-832.
+- Combined mask Region A (hydrant + fitting): rectangle x=[647,719], y=[813,900],
+  feathered (Gaussian blur radius 3px) for seamless blending.
+- Wall-tone mismatch: sampled RGB across the wall at y=780/800/820 from x=900 to
+  x=1160. Cream entrance pillar reads warm cream (~230,215,200) at x=915-945; the
+  wall segment right after it (x~955-1010) reads a cooler, mottled/blotchy gray
+  (values dipping into 120-145 at several sampled rows/columns, e.g. x=965/980/1000
+  at y=825-855) versus the flatter, more consistently light gray (~150-175, less
+  dip) of the wall segment further right (x~1020-1080) leading toward the trees.
+  This matches the user's description of a segment "two wall panels right of the
+  entrance" with a visibly different/mottled tone versus the rest of the same wall.
+  Wall vertical extent at that x-range: clean gray from y~762 (top, below a dark
+  shadow line under the facade) down to y~875 (before bushes/foliage begin).
+- Mask Region B (wall-tone patch): rectangle x=[953,1013], y=[762,878], feathered
+  the same way as Region A.
+- Mask preview: built a semi-transparent red overlay of both mask regions on the
+  source image and visually confirmed tight, correct placement around the hydrant
+  cluster and the mottled wall panel before sending the request (crops saved for
+  review during the session).
+
+API: OpenAI Images API, POST /v1/images/edits
+Model: gpt-image-2 (per project convention - do not substitute)
+Params: size=auto (API returned 1448x1086, exactly matching the source canvas),
+        quality=high, output_format=png, n=1
+Inputs: image = source PNG (yuval/outputs/2026-08-26-uriel-building-photo-edited-v6.png),
+        unmodified RGB, 1448x1086.
+        mask = matching 1448x1086 RGBA PNG; alpha=0 (edit) over two rectangular
+               regions (Region A and Region B above, each feathered with a 3px
+               Gaussian blur for smooth blending), alpha=255 (preserve) everywhere
+               else.
+
+Prompt sent to the API:
+"Photorealistic architectural photo retouch of this exact building entrance
+photograph. Keep everything outside the two masked (transparent) regions EXACTLY the
+same: the brown metal facade and all its panel seams, both flag poles and the single
+Israeli flag with its pole in their entirety, the URIEL and HERMAN ZEMEL signage, the
+covered parking entrance and its fence gate, the gray utility box, the metal vent
+grille, the light cream entrance pillar wall, all other sections of the concrete
+boundary wall, the curb, sidewalk pavers, road, sky, trees, bushes, and the parked
+cars - every other detail must remain untouched, same lighting, color grading,
+framing and camera angle, same 1448x1086 canvas.
+
+There are two separate masked (transparent) regions to edit:
+
+REGION 1 (lower-left masked area, near the ground next to the light-colored entrance
+wall, to the right of the black metal fence gate): this region currently contains a
+red-and-blue fire-hydrant/standpipe assembly (a blue vertical pipe, a dark vertical
+pipe, and a red H-shaped pipe with dark valve caps on top, mounted on a short base)
+plus, just above it, a small wall-mounted fitting consisting of two small square
+outlet plates with a small round gauge between them. Completely remove all of this
+hardware - the entire pipe assembly, its valve heads, its base, and the small square
+plate/gauge fitting above it - with no stump, no fragment, no cast shadow, and no
+discoloration left behind. Fill the region with a seamless, photorealistic
+continuation of what is naturally behind and around it: the plain light cream/beige
+textured wall surface above (matching the wall immediately to the right of this
+region at the same height and lighting), and the plain gray curb/pavement surface at
+the base (matching the curb and sidewalk immediately to either side). The metal vent
+grille immediately to the right of this region must remain completely unchanged.
+
+REGION 2 (a rectangular section of the concrete boundary wall further to the right,
+the second wall segment to the right of the entrance, between the light cream
+entrance pillar and the wall's continuation toward the trees): this section of
+concrete currently has uneven, blotchy, mottled staining and a slightly
+darker/cooler gray tone than the rest of the same wall. Recolor and smooth this
+section so its tone becomes a uniform, even light warm-gray that exactly matches the
+clean, unblemished concrete tone of the wall panels immediately to its right (and of
+the wall visible further down the block) - remove the stains, blotches, and tonal
+unevenness, while keeping the same flat concrete material, the same subtle vertical
+panel seams/joints already present, the same perspective, and the same overall
+lighting and shadow direction as the rest of the wall. Do not change the wall's
+height, position, or shape - only even out its surface tone and remove the staining.
+
+Do not add any new object anywhere. Do not alter anything outside these two masked
+regions."
+
+Output: 1448x1086 PNG (matches source exactly). Verified by:
+- Full-frame visual review of v7: the fire-hydrant/standpipe assembly and the small
+  square-plate/gauge fitting near the entrance wall are both completely gone; the
+  wall segment two panels right of the entrance now reads as a clean, uniform light
+  gray matching the rest of the wall, with no mottling/staining.
+- Zoomed crop of the Region A area: plain cream wall continues cleanly down to the
+  curb, the metal vent grille to its right is untouched, no stump/shadow/fragment of
+  the removed hardware remains.
+- Zoomed crop of the Region B area: wall tone is now even and consistent across the
+  whole panel, panel seams/joints preserved, blends naturally into the cream pillar
+  on the left and the rest of the wall toward the trees on the right, same lighting
+  direction as before.
+- Side-by-side crops (v6 vs v7) of the Israeli flag/pole, the URIEL/HERMAN ZEMEL
+  signage, the tree, and the parked cars: all pixel-identical in position, shape and
+  color (only normal PNG re-encoding grain).
+- Pixel diff (v6 vs v7) outside the two mask bounding boxes (with generous padding):
+  mean abs diff ~3.5/765 - notably lower than prior edits (v5->v6 was ~11.4/765),
+  confirming a very clean, tightly localized edit. The small number of outlier
+  pixels (584 out of ~1.57M, all diff>150) are scattered across sky/cloud texture,
+  tree foliage, and road/curb grain - consistent with normal PNG re-encoding noise,
+  not structural changes.
+- Full-frame review of v7: building facade, both windows, URIEL/HERMAN ZEMEL
+  signage, single Israeli flag and its pole, gate, entrance wall, gray utility box,
+  vent grille, curb, sky, tree, and parked cars all intact and unchanged from v6.
+
+Result: The red-and-blue fire-hydrant/standpipe assembly and the small wall-mounted
+plate/gauge fitting near the entrance wall have been completely removed, with a
+clean, seamless wall/curb surface left in their place. The mismatched, mottled gray
+wall segment two panels right of the entrance now matches the uniform light-gray
+tone of the rest of the concrete boundary wall. All other elements of the building
+and scene are unchanged from v6.
