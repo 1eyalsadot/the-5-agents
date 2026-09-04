@@ -1,0 +1,13 @@
+Composite PNG (1500x1500), built with real HTML/CSS text (Playwright screenshot @2x, downscaled to 1500x1500), not a single AI-generated image.
+
+Layers:
+1. Background image: yuval/outputs/2026-09-03-rosh-hashana-bg-v2.png (generated via gpt-image-2 — see sibling .txt for the exact prompt used).
+2. Logo: yuval/outputs/2026-09-03-uriel-logo-navy.png (recolored version of svetlana/reference/brand-assets/uriel-standard-logo.png — letters changed from white/transparent to navy #1a2452, geometry/font untouched).
+3. Hebrew text rendered live in HTML (fonts: Frank Ruhl Libre for headline/signature, Heebo for body), RTL, centered:
+   - Headline (Frank Ruhl Libre, weight 900, 98px, color #1a2452): "שנה טובה ומתוקה"
+   - Body paragraph 1 (Heebo, weight 500, 44px, color #8a6d1f): "לקראת השנה החדשה אנו מאחלים לכם שנה טובה ומתוקה. שנה של עשייה, צמיחה וחיזוק שיתוף הפעולה, שנמשיך כולנו ביחד לצעוד קדימה בנוחות."
+   - Body paragraph 2 (same style): "מי ייתן והשנה הזו תביא עמה בריאות איתנה, שקט של יום-יום ואהבה גדולה."
+   - Signature (Frank Ruhl Libre, weight 700, 46px, color #1a2452): "באהבה"
+   - Logo image below signature (recolored navy URIEL logo, ~300px wide)
+
+Rendered with Playwright (chromium, executable_path=/opt/pw-browsers/chromium), viewport 1500x1500, device_scale_factor=2, then downscaled with PIL LANCZOS to final 1500x1500 for crisp anti-aliasing.
