@@ -1,0 +1,16 @@
+Composite PNG (1500x1500), built with real HTML/CSS text (Playwright screenshot @2x, downscaled to 1500x1500), not a single AI-generated image.
+
+Layers:
+1. Background image: yuval/outputs/2026-09-03-rosh-hashana-pomegranate-bg.png (generated via gpt-image-2, size 1536x1536 — see sibling .txt for the exact prompt used). Photorealistic macro photo of two ripe red pomegranates on a branch, positioned in the RIGHT portion of the frame per user request (moved from the original center-left composition the user referenced), warm bokeh background, left side clean/uncluttered for text.
+2. Text panel: semi-transparent cream rounded card (rgba(251,246,233,0.93)), positioned on the LEFT side of the frame (since the fruit now occupies the right side), with soft drop shadow for legibility against the busy photo background.
+3. Logo: yuval/outputs/2026-09-03-uriel-logo-navy.png (recolored version of svetlana/reference/brand-assets/uriel-standard-logo.png — letters navy #1a2452), placed at the bottom of the text panel/composition.
+4. Hebrew text rendered live in HTML (fonts: Frank Ruhl Libre for headline/signature, Heebo for body), RTL, centered within the panel:
+   - Headline (Frank Ruhl Libre, weight 900, 74px, color #1a2452): "שנה טובה ומתוקה"
+   - Body paragraph 1 (Heebo, weight 500, 32px, color #8a6d1f): "לקראת השנה החדשה אנו מאחלים לכם שנה טובה ומתוקה. שנה של עשייה, צמיחה וחיזוק שיתוף הפעולה, שנמשיך כולנו ביחד לצעוד קדימה בנוחות."
+   - Body paragraph 2 (same style): "מי ייתן והשנה הזו תביא עמה בריאות איתנה, שקט של יום-יום ואהבה גדולה."
+   - Signature (Frank Ruhl Libre, weight 700, 38px, color #1a2452): "באהבה"
+   - Logo image below signature (recolored navy URIEL logo, 240px wide)
+
+Rendered with Playwright (chromium, executable_path=/opt/pw-browsers/chromium), viewport 1500x1500, device_scale_factor=2, then downscaled with PIL LANCZOS to final 1500x1500 for crisp anti-aliasing.
+
+Source HTML: /tmp/claude-0/-home-user-the-5-agents/104e019b-481e-5835-b5aa-7854a99e3b07/scratchpad/greeting_v3.html
