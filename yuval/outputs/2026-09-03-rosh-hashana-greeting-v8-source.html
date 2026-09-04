@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Heebo:wght@400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1500px;
+    height: 1500px;
+    overflow: hidden;
+  }
+
+  .canvas {
+    width: 1500px;
+    height: 1500px;
+    position: relative;
+    background-image: url('file:///home/user/the-5-agents/yuval/outputs/2026-09-03-rosh-hashana-pomegranate-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-color: #2b3a1f;
+    font-family: 'Heebo', sans-serif;
+  }
+
+  /* Soft, blurred brightening wash over the left area where the text sits.
+     No hard edges/box — a wide radial glow fading gradually into the photo.
+     Brightened opacity vs v6 for stronger contrast behind the gold+navy-stroke text. */
+  .glow {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(780px 920px at 30% 50%,
+        rgba(253, 250, 240, 0.94) 0%,
+        rgba(253, 250, 240, 0.87) 30%,
+        rgba(253, 250, 240, 0.62) 52%,
+        rgba(253, 250, 240, 0.26) 72%,
+        rgba(253, 250, 240, 0) 88%
+      );
+  }
+
+  .content {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 780px;
+    padding: 0 100px 0 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  h1 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 900;
+    font-size: 62px;
+    color: #1a2452;
+    line-height: 1.2;
+    margin-bottom: 42px;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    text-shadow: 0 2px 18px rgba(253, 250, 240, 0.9), 0 1px 3px rgba(253, 250, 240, 0.7);
+  }
+
+  .body-text {
+    font-size: 37px;
+    font-weight: 500;
+    color: #b8860b;
+    line-height: 1.65;
+    margin-bottom: 28px;
+    /* Navy outline around the gold letters: both colors stay visible. */
+    -webkit-text-stroke: 1.25px #1a2452;
+    -webkit-text-fill-color: #b8860b;
+    paint-order: stroke fill;
+    text-shadow: 0 1px 10px rgba(253, 250, 240, 0.75), 0 1px 2px rgba(253, 250, 240, 0.55);
+  }
+
+  .body-text.second {
+    margin-bottom: 0;
+  }
+
+  .signature-block {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .signature {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 700;
+    font-size: 39px;
+    color: #1a2452;
+    margin-bottom: 30px;
+    text-shadow: 0 2px 16px rgba(253, 250, 240, 0.9), 0 1px 3px rgba(253, 250, 240, 0.7);
+  }
+
+  .logo-wrap {
+    position: relative;
+    width: 260px;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-glow {
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(closest-side, rgba(253, 250, 240, 0.75), rgba(253, 250, 240, 0) 75%);
+    border-radius: 50%;
+  }
+
+  .logo {
+    position: relative;
+    width: 240px;
+    height: auto;
+  }
+</style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="glow"></div>
+    <div class="content">
+      <h1>שנה טובה ומתוקה</h1>
+      <div class="body-text">לקראת השנה החדשה אנחנו מאחלים לכם שנה טובה ומתוקה. שנה של עשייה, צמיחה, הצלחה ושותפות פוריה, שנמשיך כולנו ביחד לצעוד קדימה בנוחות.</div>
+      <div class="body-text second">מי ייתן והשנה החדשה תביא עמה בריאות, צמיחה ועשייה משותפת.</div>
+      <div class="signature-block">
+        <div class="signature">באהבה</div>
+        <div class="logo-wrap">
+          <div class="logo-glow"></div>
+          <img class="logo" src="file:///home/user/the-5-agents/yuval/outputs/2026-09-03-uriel-logo-navy.png">
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

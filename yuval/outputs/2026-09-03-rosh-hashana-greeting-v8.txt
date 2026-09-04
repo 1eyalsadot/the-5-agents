@@ -1,0 +1,23 @@
+v8 — text-only update over v7 (design unchanged, approved layout kept as-is).
+
+Method: HTML/CSS render (not gpt-image-2 generation) via Playwright/Chromium at 1500x1500,
+same technique used for v7. Only the two .body-text <div> contents were replaced; no CSS,
+structure, sizes or colors were touched (navy h1 "שנה טובה ומתוקה" on one line, gold body
+text with navy -webkit-text-stroke outline, pomegranate background with bright glow,
+"באהבה" signature + URIEL navy logo).
+
+New body text (gold, as provided by user):
+
+Paragraph 1:
+"לקראת השנה החדשה אנחנו מאחלים לכם שנה טובה ומתוקה. שנה של עשייה, צמיחה, הצלחה ושותפות
+פוריה, שנמשיך כולנו ביחד לצעוד קדימה בנוחות."
+
+Paragraph 2 (with spacing before it, per existing .body-text.second structure):
+"מי ייתן והשנה החדשה תביא עמה בריאות, צמיחה ועשייה משותפת."
+
+font-size for .body-text kept at the original 37px — the new text fit the content area
+(780px wide block, 100px/140px side padding) without any overflow or clipping, verified
+visually via a full-canvas render before saving, so no size reduction was needed.
+
+Source HTML: /home/user/the-5-agents/yuval/outputs/2026-09-03-rosh-hashana-greeting-v8-source.html
+(based on the approved v7 HTML, only .body-text div contents edited)
