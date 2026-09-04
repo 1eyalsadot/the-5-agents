@@ -1,0 +1,19 @@
+Composite PNG (1500x1500), built with real HTML/CSS text (Playwright screenshot @2x, downscaled to 1500x1500), not a single AI-generated image.
+Iteration on v3: removed the separate cream text-card/box, and instead blended the text directly onto the background photo per user request.
+
+Layers:
+1. Background image (unchanged from v3, reused as-is, no new AI generation needed):
+   yuval/outputs/2026-09-03-rosh-hashana-pomegranate-bg.png (generated via gpt-image-2, size 1536x1536 — see sibling .txt for the exact prompt used). Photorealistic macro photo of two ripe red pomegranates on a branch, positioned in the RIGHT portion of the frame, warm bokeh background, left side clean/uncluttered for text.
+2. Soft brightening glow (replaces the old opaque rounded card): a single blurred CSS radial-gradient wash over the left/center area —
+   radial-gradient(760px 900px at 30% 50%, rgba(253,250,240,0.86) 0%, rgba(253,250,240,0.78) 30%, rgba(253,250,240,0.55) 52%, rgba(253,250,240,0.22) 72%, rgba(253,250,240,0) 88%)
+   No hard edges, no border-radius, no box-shadow — it fades gradually into the photo so the green/orange bokeh is still visible underneath.
+3. Text rendered live in HTML directly on top of the glow (no card/frame/box), RTL, centered, with a soft text-shadow (not a box-shadow) for legibility:
+   - Headline (Frank Ruhl Libre, weight 900, 76px, color #1a2452): "שנה טובה ומתוקה"
+   - Body paragraph 1 (Heebo, weight 500, 33px, color #7a5e15): "לקראת השנה החדשה אנו מאחלים לכם שנה טובה ומתוקה. שנה של עשייה, צמיחה וחיזוק שיתוף הפעולה, שנמשיך כולנו ביחד לצעוד קדימה בנוחות."
+   - Body paragraph 2 (same style): "מי ייתן והשנה הזו תביא עמה בריאות איתנה, שקט של יום-יום ואהבה גדולה."
+   - Signature (Frank Ruhl Libre, weight 700, 39px, color #1a2452): "באהבה"
+4. Logo: yuval/outputs/2026-09-03-uriel-logo-navy.png (navy-lettered URIEL logo), placed directly on the background below the signature, with only a small soft circular radial glow behind it (no rectangular box) for contrast — 240px wide.
+
+Rendered with Playwright (chromium, executable_path=/opt/pw-browsers/chromium), viewport 1500x1500, device_scale_factor=2, then downscaled with PIL LANCZOS to final 1500x1500 for crisp anti-aliasing.
+
+Source HTML: /tmp/claude-0/-home-user-the-5-agents/104e019b-481e-5835-b5aa-7854a99e3b07/scratchpad/greeting_v4.html
