@@ -1,0 +1,12 @@
+Not AI-generated — this is a programmatic recolor (Pillow/numpy) of the existing brand logo file:
+  Source: svetlana/reference/brand-assets/uriel-standard-logo.png (identical to svetlana/reference/standard-uriel-logo.png)
+
+Finding: the source PNG's "letters" are not opaque white pixels — they are fully transparent (alpha=0) holes carrying incidental navy-ish RGB data that is invisible until composited. The yellow banner background is fully opaque (alpha=255, RGB ~255,213,0).
+
+Method:
+1. Identified all alpha=0 pixels.
+2. Flood-filled (BFS) from the four image borders across alpha=0 regions to separate "outside the yellow banner" (transparent) pixels from "interior letter-hole" (transparent) pixels.
+3. For interior letter-hole pixels only: set RGB to navy #1a2452 and alpha to 255 (fully opaque).
+4. Left all other pixels (yellow banner + true transparent background/corners) untouched.
+
+Result: geometry, font and banner shape are pixel-identical to the original logo; only the letter color changed from invisible/white-appearing to solid navy (#1a2452), matching the brand's other materials (building signage, "ITEM" catalog tags).
