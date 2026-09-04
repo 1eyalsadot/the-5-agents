@@ -1,0 +1,24 @@
+Composite PNG (1500x1500), built with real HTML/CSS text (Playwright screenshot @2x, downscaled to 1500x1500), not a single AI-generated image.
+Iteration on v4: two targeted tweaks only, per user request — nothing else changed (position, background, logo, navy headline color, and overall structure are identical to v4).
+
+Changes vs v4:
+1. Font sizes increased ~12%:
+   - Headline (h1): 76px -> 85px (Frank Ruhl Libre, weight 900, color #1a2452 — unchanged navy)
+   - Body paragraphs (.body-text): 33px -> 37px (Heebo, weight 500)
+   - Signature ("באהבה") intentionally left unchanged at 39px (not part of the requested change).
+2. Body text color made richer/bolder: #7a5e15 (muted amber-brown) -> #b8860b (dark goldenrod), a stronger, more saturated gold that better matches the brand's yellow banner/logo tones while remaining clearly legible against the light cream glow background.
+
+Unchanged from v4 (verified, not touched):
+- Background image: yuval/outputs/2026-09-03-rosh-hashana-pomegranate-bg.png (pomegranates on the right, clean left side for text)
+- Soft radial-gradient glow wash (same values): radial-gradient(760px 900px at 30% 50%, rgba(253,250,240,0.86) 0%, rgba(253,250,240,0.78) 30%, rgba(253,250,240,0.55) 52%, rgba(253,250,240,0.22) 72%, rgba(253,250,240,0) 88%)
+- Layout/position of content block, text-shadow legibility treatment, signature block, and logo (yuval/outputs/2026-09-03-uriel-logo-navy.png, 240px, with soft circular glow) — all identical to v4.
+
+Text content (unchanged):
+- Headline: "שנה טובה ומתוקה"
+- Body paragraph 1: "לקראת השנה החדשה אנו מאחלים לכם שנה טובה ומתוקה. שנה של עשייה, צמיחה וחיזוק שיתוף הפעולה, שנמשיך כולנו ביחד לצעוד קדימה בנוחות."
+- Body paragraph 2: "מי ייתן והשנה הזו תביא עמה בריאות איתנה, שקט של יום-יום ואהבה גדולה."
+- Signature: "באהבה"
+
+Rendered with Playwright (chromium, executable_path=/opt/pw-browsers/chromium), viewport 1500x1500, device_scale_factor=2, then downscaled with PIL LANCZOS to final 1500x1500 for crisp anti-aliasing.
+
+Source HTML: /tmp/claude-0/-home-user-the-5-agents/104e019b-481e-5835-b5aa-7854a99e3b07/scratchpad/greeting_v5.html
