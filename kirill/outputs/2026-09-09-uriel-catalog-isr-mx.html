@@ -259,29 +259,38 @@ footer {
 .page.view-rows .meta { border-top: none; padding-top: 0; margin-top: 0; white-space: nowrap; flex-shrink: 0; }
 .page.view-rows .no-img { font-size: 9px; padding: 3px 4px; }
 .page.view-rows .approx-tag { position: static; margin-inline-start: 6px; }
+.page.view-rows .thumb-multi {
+  width: auto; height: 56px; aspect-ratio: unset; flex-shrink: 0;
+  display: flex; flex-direction: row; gap: 4px; padding: 0; background: none;
+}
+.page.view-rows .thumb-multi .swatch { width: 56px; height: 56px; border-radius: 6px; flex-shrink: 0; }
+.page.view-rows .thumb-multi .swatch-label { font-size: 8px; padding: 2px 1px; }
 @media (max-width: 700px) {
   .page.view-rows .product { flex-wrap: wrap; }
   .page.view-rows .meta { width: 100%; padding-inline-start: 72px; }
 }
+.page-header { position: sticky; top: 0; z-index: 50; background: var(--bg); padding-top: 32px; margin-top: -32px; }
 </style>
 </head>
 <body>
   <div class="page">
-    <div class="cover">
-      <div>
-        <div class="cover-brand">URIEL</div>
-        <h1 class="cover-title">Selected Commercial<br>Products</h1>
-        <p class="cover-sub">Israel &amp; Mexico &middot; 2026</p>
+    <div class="page-header">
+      <div class="cover">
+        <div>
+          <div class="cover-brand">URIEL</div>
+          <h1 class="cover-title">Selected Commercial<br>Products</h1>
+          <p class="cover-sub">Israel &amp; Mexico &middot; 2026</p>
+        </div>
+        <div class="cover-stats">
+          <div class="stat"><span class="num">91</span><span class="lbl">Products</span></div>
+          <div class="stat"><span class="num">16</span><span class="lbl">Categories</span></div>
+        </div>
       </div>
-      <div class="cover-stats">
-        <div class="stat"><span class="num">91</span><span class="lbl">Products</span></div>
-        <div class="stat"><span class="num">16</span><span class="lbl">Categories</span></div>
-      </div>
-    </div>
 
-    <div class="view-toggle">
-      <button id="btn-grid" class="active" onclick="setView('grid')">Grid</button>
-      <button id="btn-rows" onclick="setView('rows')">Rows</button>
+      <div class="view-toggle">
+        <button id="btn-grid" class="active" onclick="setView('grid')">Grid</button>
+        <button id="btn-rows" onclick="setView('rows')">Rows</button>
+      </div>
     </div>
 
       <section class="cat-section">
