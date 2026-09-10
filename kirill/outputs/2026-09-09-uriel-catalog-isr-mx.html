@@ -53,6 +53,7 @@ body {
 .page { max-width: 1240px; margin: 0 auto; padding: 32px 28px 72px; }
 
 .cover {
+  position: relative;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -242,13 +243,19 @@ footer {
   .grid { grid-template-columns: repeat(4, 1fr); }
 }
 
-.view-toggle { display: inline-flex; gap: 4px; background: var(--surface-alt); border-radius: 10px; padding: 4px; margin: 0 0 20px; }
+.view-toggle {
+  position: absolute; left: 50%; bottom: 32px; transform: translateX(-50%);
+  display: inline-flex; gap: 4px; background: var(--surface-alt); border-radius: 10px; padding: 4px;
+}
 .view-toggle button {
   font-family: var(--font-head); font-weight: 700; font-size: 13.5px;
   border: none; background: transparent; color: var(--ink-soft);
   padding: 7px 16px; border-radius: 7px; cursor: pointer;
 }
 .view-toggle button.active { background: var(--ink); color: var(--gold); }
+@media (max-width: 700px) {
+  .view-toggle { position: static; transform: none; margin: 16px 0 0; }
+}
 
 .page.view-rows .grid { grid-template-columns: 1fr; gap: 10px; }
 .page.view-rows .product { flex-direction: row; align-items: center; gap: 16px; padding: 8px 16px 8px 8px; }
@@ -281,15 +288,14 @@ footer {
           <h1 class="cover-title">Selected Commercial<br>Products</h1>
           <p class="cover-sub">Israel &amp; Mexico &middot; 2026</p>
         </div>
+        <div class="view-toggle">
+          <button id="btn-grid" class="active" onclick="setView('grid')">Grid</button>
+          <button id="btn-rows" onclick="setView('rows')">Rows</button>
+        </div>
         <div class="cover-stats">
           <div class="stat"><span class="num">91</span><span class="lbl">Products</span></div>
           <div class="stat"><span class="num">16</span><span class="lbl">Categories</span></div>
         </div>
-      </div>
-
-      <div class="view-toggle">
-        <button id="btn-grid" class="active" onclick="setView('grid')">Grid</button>
-        <button id="btn-rows" onclick="setView('rows')">Rows</button>
       </div>
     </div>
 
