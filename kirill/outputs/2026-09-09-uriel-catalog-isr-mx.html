@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<title>URIEL Product Catalog</title>
+<title>URIEL Selected Commercial Products</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@600;700;800&family=Inter:wght@400;500;600&display=swap">
 <style>
 :root {
@@ -241,6 +241,28 @@ footer {
   .cat-section { page-break-inside: avoid; }
   .grid { grid-template-columns: repeat(4, 1fr); }
 }
+
+.view-toggle { display: inline-flex; gap: 4px; background: var(--surface-alt); border-radius: 10px; padding: 4px; margin: 0 0 20px; }
+.view-toggle button {
+  font-family: var(--font-head); font-weight: 700; font-size: 13.5px;
+  border: none; background: transparent; color: var(--ink-soft);
+  padding: 7px 16px; border-radius: 7px; cursor: pointer;
+}
+.view-toggle button.active { background: var(--ink); color: var(--gold); }
+
+.page.view-rows .grid { grid-template-columns: 1fr; gap: 10px; }
+.page.view-rows .product { flex-direction: row; align-items: center; gap: 16px; padding: 8px 16px 8px 8px; }
+.page.view-rows .thumb, .page.view-rows .thumb-multi { width: 56px; height: 56px; aspect-ratio: 1/1; flex-shrink: 0; padding: 6px; border-radius: 8px; }
+.page.view-rows .p-body { flex-direction: row; align-items: center; gap: 16px; padding: 0; flex: 1; }
+.page.view-rows .sku { flex-shrink: 0; }
+.page.view-rows .name { flex: 1; font-size: 16px; text-transform: none; margin: 0; }
+.page.view-rows .meta { border-top: none; padding-top: 0; margin-top: 0; white-space: nowrap; flex-shrink: 0; }
+.page.view-rows .no-img { font-size: 9px; padding: 3px 4px; }
+.page.view-rows .approx-tag { position: static; margin-inline-start: 6px; }
+@media (max-width: 700px) {
+  .page.view-rows .product { flex-wrap: wrap; }
+  .page.view-rows .meta { width: 100%; padding-inline-start: 72px; }
+}
 </style>
 </head>
 <body>
@@ -248,7 +270,7 @@ footer {
     <div class="cover">
       <div>
         <div class="cover-brand">URIEL</div>
-        <h1 class="cover-title">Product<br>Catalog</h1>
+        <h1 class="cover-title">Selected Commercial<br>Products</h1>
         <p class="cover-sub">Israel &amp; Mexico &middot; 2026</p>
       </div>
       <div class="cover-stats">
@@ -257,9 +279,9 @@ footer {
       </div>
     </div>
 
-    <div class="legend">
-      <span><span class="dot"></span> Representative photo — exact color/variant not in the image library (0 items)</span>
-      <span><span class="dot danger"></span> No photo available yet (0 items)</span>
+    <div class="view-toggle">
+      <button id="btn-grid" class="active" onclick="setView('grid')">Grid</button>
+      <button id="btn-rows" onclick="setView('rows')">Rows</button>
     </div>
 
       <section class="cat-section">
@@ -1120,5 +1142,20 @@ footer {
       Source: Uriel product codes list (ISR / MX) &middot; Product photos matched by SKU from the Uriel catalog image library and the latest uploaded photo files &middot; 806CB / 807CB shown in all available colors &middot; ST range and Active range photos cropped from packaging artwork and normalized to a uniform size &middot; 3 newly added products this update
     </footer>
   </div>
+
+<script>
+function setView(mode){
+  document.querySelector('.page').classList.toggle('view-rows', mode==='rows');
+  document.getElementById('btn-grid').classList.toggle('active', mode==='grid');
+  document.getElementById('btn-rows').classList.toggle('active', mode==='rows');
+  try { localStorage.setItem('uriel-catalog-view', mode); } catch(e) {}
+}
+(function(){
+  try {
+    var saved = localStorage.getItem('uriel-catalog-view');
+    if (saved === 'rows') setView('rows');
+  } catch(e) {}
+})();
+</script>
 </body>
 </html>
