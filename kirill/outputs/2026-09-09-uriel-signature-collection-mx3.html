@@ -140,7 +140,7 @@ body {
   grid-template-columns: repeat(3, 1fr);
   gap: 22px;
 }
-.shield-block .grid { grid-template-columns: repeat(2, 1fr); position: relative; }
+.shield-block .grid { grid-template-columns: repeat(3, 1fr); position: relative; }
 @media (max-width: 900px) { .grid, .shield-block .grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .grid, .shield-block .grid { grid-template-columns: 1fr; } .product-wide { grid-column: 1 / -1; } }
 
@@ -168,14 +168,12 @@ body {
 
 .thumb {
   position: relative;
-  aspect-ratio: 4 / 3;
+  height: 0;
+  padding-top: 75%;
   background: #232329;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
+  overflow: hidden;
 }
-.thumb img { width: 100%; height: 100%; object-fit: contain; }
+.thumb img { position: absolute; inset: 10px; width: calc(100% - 20px); height: calc(100% - 20px); object-fit: contain; }
 .thumb-multi {
   display: grid;
   gap: 1px;
