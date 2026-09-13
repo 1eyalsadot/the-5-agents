@@ -77,3 +77,14 @@
 **נבחר:** Statista Orthopedic Devices - Azerbaijan כממצא החדש המרכזי — נתון ספציפי-מדינה תחת הקטגוריה המדויקת שהתבקשה, שלא נמצא בסבב החיפוש הקודם. עודכן ישירות לקובץ הקיים (סעיף 4 חדש) במקום ליצור קובץ נפרד, כפי שהתבקש.
 **קובץ ב-Content:** 2026-08-08-azerbaijan-orthopedic-market.md (עודכן, לא נוצר קובץ חדש)
 ---
+
+## 2026-09-13 00:00 | בדיקת היתכנות: איתור תמונת מוצר URIEL לפי מק"ט (SKU 391)
+**מילות מפתח:** URIEL, SKU, מק"ט, 391, product image, Shopify, catalog, קטלוג מוצרים
+**שאילתות שנעשו:** WebFetch על https://uriel-global.com/ (מבנה אתר), "site:uriel-global.com 391", WebFetch על https://uriel-global.com/?s=391, ניסיון ישיר https://uriel-global.com/products/391 ו-/en/products/391 (404), "uriel-global.com "391" גרבי בריאות כותנה", ""uriel-global.com/products/391"", WebFetch חוזר על https://uriel-global.com/products/390, WebFetch על https://uriel-global.com/products/390.json, WebFetch על https://uriel-global.com/products.json?limit=5 (בדיקת endpoint גלובלי)
+**מקורות שנמצאו:**
+- [גרבי בריאות מכותנה סרוגה לחורף | 391](https://uriel-global.com/products/390) - איכות: ⭐⭐⭐⭐⭐ - עמוד המוצר עצמו; handle ב-URL הוא 390 אבל המק"ט המוצג/SKU-ים בפועל הם 391
+- [Product JSON — /products/390.json](https://uriel-global.com/products/390.json) - איכות: ⭐⭐⭐⭐⭐ - מקור המבנה הכי אמין: SKU-ים מדויקים (391W-*, 391B-*) ומערך תמונות מלא
+- [Products.json — endpoint גלובלי](https://uriel-global.com/products.json?limit=5) - איכות: ⭐⭐⭐⭐⭐ - אומת שעובד; פוטנציאל למיפוי SKU→image לכל הקטלוג בבת אחת בעתיד
+**נבחר:** עמוד /products/390 + ה-JSON שלו כמקור לתמונה ולפרטי המק"ט 391. תיעוד מלא (כולל URL-ים לתמונות ומגבלת ההורדה הבינארית) נשמר ב-chen/Memory (לא ב-Content, כי זו בדיקת היתכנות תהליכית ולא מאמר גלם ליעל).
+**קובץ ב-Content:** לא נוצר קובץ ב-Content/ — התיעוד נשמר ב-chen/Memory/2026-09-13-uriel-sku-391.md (בקשה ספציפית של ראובן לבדיקת היתכנות, לא תוכן לשכתוב)
+---
