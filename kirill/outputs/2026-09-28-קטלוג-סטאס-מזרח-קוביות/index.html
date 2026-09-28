@@ -1,0 +1,303 @@
+<title>קטלוג סטאס מזרח קוביות</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@500;700;800&family=Heebo:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #eef1f6;
+  --surface: #ffffff;
+  --surface-alt: #e4e8f0;
+  --ink: #140d41;
+  --ink-soft: #514c78;
+  --muted: #85809f;
+  --line: #dadfec;
+  --gold: #ffd500;
+  --gold-ink: #6b5900;
+  --uriel-green: #7cb928;
+  --promo-bg: #fff2cc;
+  --promo-ink: #8a6d00;
+  --shadow: 0 1px 2px rgba(20,13,65,0.06), 0 8px 24px rgba(20,13,65,0.06);
+  --radius: 16px;
+  --font-head: 'Assistant', -apple-system, "Segoe UI", sans-serif;
+  --font-body: 'Heebo', -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #100a30;
+    --surface: #1a1350;
+    --surface-alt: #251a63;
+    --ink: #f3f1ff;
+    --ink-soft: #c6c0ea;
+    --muted: #948ec2;
+    --line: #382d78;
+    --gold: #ffd500;
+    --gold-ink: #3a3000;
+    --promo-bg: #4a3c00;
+    --promo-ink: #ffe27a;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #100a30;
+  --surface: #1a1350;
+  --surface-alt: #251a63;
+  --ink: #f3f1ff;
+  --ink-soft: #c6c0ea;
+  --muted: #948ec2;
+  --line: #382d78;
+  --gold: #ffd500;
+  --gold-ink: #3a3000;
+  --promo-bg: #4a3c00;
+  --promo-ink: #ffe27a;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  direction: rtl;
+}
+::selection { background: var(--gold); color: var(--gold-ink); }
+.page { max-width: 1240px; margin: 0 auto; padding: 28px 20px 64px; }
+
+.topbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-bottom: 20px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid var(--line);
+}
+.brand { display: flex; flex-direction: column; gap: 4px; }
+.brand .mark {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 26px;
+  letter-spacing: 0.02em;
+}
+.brand .mark span { color: var(--uriel-green); }
+.brand .sub {
+  font-size: 13.5px;
+  color: var(--muted);
+  letter-spacing: 0.01em;
+}
+.stats { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; text-align: left; }
+.stats b { color: var(--ink); font-size: 15px; }
+
+.legend {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-size: 12.5px;
+  color: var(--muted);
+  margin-bottom: 26px;
+}
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend .dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.legend .dot.gold { background: var(--gold); }
+.legend .dot.green { background: var(--uriel-green); }
+
+.cat-band {
+  margin: 34px 0 14px;
+  padding: 11px 18px;
+  background: var(--ink);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cat-band:first-of-type { margin-top: 0; }
+.cat-band h2 {
+  margin: 0;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.01em;
+  color: var(--gold);
+}
+.cat-band .cat-count { font-size: 12px; color: var(--ink-soft); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.card .shot {
+  aspect-ratio: 4/5;
+  background: var(--surface-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+.card .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.card .promo-badge {
+  position: absolute;
+  top: 10px;
+  inset-inline-start: 10px;
+  background: var(--gold);
+  color: var(--gold-ink);
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 12.5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.01em;
+}
+.card .body { padding: 14px 14px 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.card h3 {
+  margin: 0;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.3;
+}
+.card .sku-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.card .sku {
+  font-family: ui-monospace, "SF Mono", Consolas, monospace;
+  background: var(--surface-alt);
+  color: var(--ink-soft);
+  padding: 2px 7px;
+  border-radius: 6px;
+  font-size: 11.5px;
+}
+.card .prices { margin-top: auto; padding-top: 8px; border-top: 1px dashed var(--line); }
+.card .msrp { font-size: 12.5px; color: var(--muted); }
+.card .final-row { display: flex; align-items: baseline; gap: 8px; margin-top: 3px; }
+.card .final { font-family: var(--font-head); font-weight: 800; font-size: 20px; color: var(--uriel-green); font-variant-numeric: tabular-nums; }
+.card .final small { font-size: 12px; font-weight: 500; color: var(--muted); }
+.card .cost-row { font-size: 11.5px; color: var(--muted); margin-top: 4px; font-variant-numeric: tabular-nums; }
+.card .barcode { font-size: 10.5px; color: var(--muted); font-variant-numeric: tabular-nums; margin-top: 2px; }
+
+footer { margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 12px; color: var(--muted); text-align: center; }
+</style>
+
+<div class="page">
+  <div class="topbar">
+    <div class="brand">
+      <div class="mark">URIEL <span>אורתופדיה</span></div>
+      <div class="sub">קטלוג סטאס מזרח — קוביות, תמונות מאתר URIEL החי</div>
+    </div>
+    <div class="stats">סה"כ <b>24</b> מוצרים</div>
+  </div>
+
+  <div class="legend">
+    <span><span class="dot gold"></span> תג זהב = מבצע פעיל</span>
+    <span><span class="dot green"></span> המחיר הירוק הוא המחיר הסופי בפועל</span>
+    <span>המחירים כוללים מע"מ, אלא אם צוין אחרת</span>
+  </div>
+
+  <div class="cat-band"><h2>חגורות תמיכה</h2><span class="cat-count">2 מוצרים</span></div>
+  <div class="grid" id="grid-belts"></div>
+
+  <div class="cat-band"><h2>מגנים ותמיכות</h2><span class="cat-count">9 מוצרים</span></div>
+  <div class="grid" id="grid-guards"></div>
+
+  <div class="cat-band"><h2>סדים</h2><span class="cat-count">6 מוצרים</span></div>
+  <div class="grid" id="grid-splints"></div>
+
+  <div class="cat-band"><h2>Shield Series</h2><span class="cat-count">3 מוצרים</span></div>
+  <div class="grid" id="grid-shield"></div>
+
+  <div class="cat-band"><h2>סד ליישור אצבע — 4 מידות</h2><span class="cat-count">4 מוצרים</span></div>
+  <div class="grid" id="grid-fingers"></div>
+
+  <footer>קטלוג סטאס מזרח (קוביות) — תמונות נשלפו ישירות מאתר URIEL החי (uriel-global.com). מחירים מהמחירון שהועלה, ללא שינוי.</footer>
+</div>
+
+<script>
+function ils(n) {
+  return '₪' + n.toLocaleString('he-IL', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+}
+
+function card(p) {
+  const promoBadge = p.promoLabel ? `<div class="promo-badge">${p.promoLabel}</div>` : '';
+  return `
+  <div class="card">
+    <div class="shot">${promoBadge}<img src="images/${p.img}" alt="${p.name}" loading="lazy"></div>
+    <div class="body">
+      <h3>${p.name}</h3>
+      <div class="sku-row"><span class="sku">${p.sku}</span></div>
+      <div class="prices">
+        <div class="msrp">${ils(p.msrp)}</div>
+        <div class="final-row"><span class="final">${ils(p.final)}</span><small>לאחר מבצע</small></div>
+        <div class="cost-row">קניה ${ils(p.cost)} · לאחר הנחה ${ils(p.disc)}</div>
+        ${p.barcode ? `<div class="barcode">ברקוד ${p.barcode}</div>` : ''}
+      </div>
+    </div>
+  </div>`;
+}
+
+const belts = [
+  {name:'חגורת גב עם תמיכות', sku:'AC07', img:'AC07.jpg', msrp:199.9038, cost:124.93362831858406, disc:93.70022123893804, final:78.08351769911503, promoLabel:'5+1', barcode:'7297046510287'},
+  {name:'חגורת בטן קלה', sku:'AC11', img:'AC11.jpg', msrp:156.9046, cost:98.06047197640117, disc:73.54535398230088, final:61.287794985250734, promoLabel:'5+1', barcode:'7297046510027'},
+];
+
+const guards = [
+  {name:'חבק לשורש כף היד', sku:'AC25', img:'AC25.jpg', msrp:79.9, cost:49.93500324983751, disc:37.45125243737813, final:31.20937703114844, promoLabel:'5+1', barcode:'7297046510034'},
+  {name:'חבק טניס', sku:'AC91', img:'AC91.jpg', msrp:84.9, cost:53.059847007649616, disc:39.79488525573721, final:33.16240437978101, promoLabel:'5+1', barcode:'7297046510256'},
+  {name:'מגן קרסול נושם', sku:'AC37', img:'AC37.jpg', msrp:79.9, cost:49.93500324983751, disc:37.45125243737813, final:31.20937703114844, promoLabel:'5+1', barcode:'7297046510201'},
+  {name:'מגן ברך + צירים', sku:'AC43D', img:'AC43D.jpg', msrp:219.9, cost:137.43062846857657, disc:103.07297135143243, final:85.89414279286035, promoLabel:'5+1', barcode:'7297046510270'},
+  {name:'מגן ברך עם תמיכות', sku:'AC45X', img:'AC45X.jpg', msrp:159.9, cost:99.93250337483126, disc:74.94937753112345, final:62.45781460926954, promoLabel:'5+1', barcode:'7297046510225'},
+  {name:'מגן ירך', sku:'AC49', img:'AC49.jpg', msrp:131.9004, cost:82.43362831858407, disc:61.825221238938056, final:51.52101769911505, promoLabel:'5+1', barcode:'7297046510232'},
+  {name:'מגן מרפק', sku:'AC95', img:'AC95.jpg', msrp:89.9, cost:56.184690765461724, disc:42.1385180740963, final:35.115431728413576, promoLabel:'5+1', barcode:'7297046510263'},
+  {name:'מישר כתפיים אקטיב', sku:'AC75', img:'AC75.jpg', msrp:169.9, cost:106.2, disc:79.65, final:79.65, promoLabel:null, barcode:'7297046510379'},
+  {name:'מיישר כתפיים אקטיב XXL', sku:'AC75 XXL', img:'AC75_XXL.jpg', msrp:169.9, cost:106.2, disc:79.65, final:79.65, promoLabel:null, barcode:'7297046520378'},
+];
+
+const splints = [
+  {name:'סד לשורש כף יד שמאל', sku:'AC27L', img:'AC27L.jpg', msrp:99.9, cost:62.43437828108595, disc:46.82578371081446, final:39.02148642567872, promoLabel:'5+1', barcode:'7297046510058'},
+  {name:'סד לשורש כף יד ימין', sku:'AC27R', img:'AC27R.jpg', msrp:99.9, cost:62.43437828108595, disc:46.82578371081446, final:39.02148642567872, promoLabel:'5+1', barcode:'7297046510072'},
+  {name:'סד לאגודל', sku:'AC28', img:'AC28.jpg', msrp:89.9, cost:56.184690765461724, disc:42.1385180740963, final:35.115431728413576, promoLabel:'5+1', barcode:'7297046510195'},
+  {name:'רצועה לפיקת הברך', sku:'AC40', img:'AC40.jpg', msrp:171.9024, cost:107.43362831858407, disc:80.57522123893806, final:67.14601769911505, promoLabel:'5+1', barcode:'7297046114294'},
+  {name:'סד ליד דו צדדי', sku:'266', img:'266.jpg', msrp:169.9, cost:106.18219089045547, disc:79.63664316784161, final:79.63664316784161, promoLabel:null, barcode:'7297046114195'},
+  {name:'סד לאגודל', sku:'268', img:'268.jpg', msrp:254.9, cost:159.30453477326134, disc:119.478401079946, final:119.478401079946, promoLabel:null, barcode:'7297046114188'},
+];
+
+const shield = [
+  {name:'מקבע קרסול דו צידי בשילוב כריות אויר', sku:'SH333', img:'SH333.png', msrp:349.9, cost:218.68, disc:164.01, final:70, promoLabel:'מחיר מבצע', barcode:null},
+  {name:'חגורה לישור הגב', sku:'SH776', img:'SH776.png', msrp:999.9, cost:624.9, disc:468.675, final:350, promoLabel:'מחיר מבצע', barcode:null},
+  {name:'תומך ברך שילדס', sku:'SH422', img:'SH422.png', msrp:449.9, cost:281.2, disc:210.9, final:120, promoLabel:'מחיר מבצע', barcode:null},
+];
+
+const fingers = [
+  {name:'סד ליישור אצבע — S', sku:'238S', img:'238S.jpg', msrp:42.9, cost:26.8111594420279, disc:20.108369581520925, final:20.108369581520925, promoLabel:null, barcode:'7297046114775'},
+  {name:'סד ליישור אצבע — M', sku:'238M', img:'238M.jpg', msrp:42.9, cost:26.8111594420279, disc:20.108369581520925, final:20.108369581520925, promoLabel:null, barcode:'7297046124774'},
+  {name:'סד ליישור אצבע — L', sku:'238L', img:'238L.jpg', msrp:42.9, cost:26.8111594420279, disc:20.108369581520925, final:20.108369581520925, promoLabel:null, barcode:'7297046134773'},
+  {name:'סד ליישור אצבע — XL', sku:'238XL', img:'238XL.jpg', msrp:42.9, cost:26.8111594420279, disc:20.108369581520925, final:20.108369581520925, promoLabel:null, barcode:'7297046144772'},
+];
+
+document.getElementById('grid-belts').innerHTML = belts.map(card).join('');
+document.getElementById('grid-guards').innerHTML = guards.map(card).join('');
+document.getElementById('grid-splints').innerHTML = splints.map(card).join('');
+document.getElementById('grid-shield').innerHTML = shield.map(card).join('');
+document.getElementById('grid-fingers').innerHTML = fingers.map(card).join('');
+</script>

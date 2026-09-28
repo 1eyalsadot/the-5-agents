@@ -97,12 +97,24 @@ body { background: var(--bg); color: var(--ink); font-family: var(--font-body); 
 
 @media (max-width: 720px) {
   .col-header { display: none; }
-  .row { grid-template-columns: 76px 1fr; grid-template-areas: "shot name" "shot cost" "shot disc" "shot final"; row-gap: 4px; }
-  .row .shot { grid-area: shot; width: 76px; height: 76px; }
-  .row .name-cell { grid-area: name; }
+  .row {
+    grid-template-columns: 96px 1fr;
+    grid-template-areas:
+      "shot name"
+      "shot msrp"
+      "shot cost"
+      "shot disc"
+      "shot final";
+    row-gap: 3px;
+  }
+  .row .shot { grid-area: shot; width: 96px; height: 96px; }
+  .row .name-cell { grid-area: name; margin-bottom: 4px; }
+  .row .msrp-cell { grid-area: msrp; }
   .row .cost-cell { grid-area: cost; }
   .row .disc-cell { grid-area: disc; }
-  .row .final-cell { grid-area: final; }
+  .row .final-cell { grid-area: final; margin-top: 2px; }
+  .row .cell { display: flex; align-items: baseline; gap: 6px; }
+  .row .cell .label { margin-bottom: 0; min-width: 78px; }
 }
 
 footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12px; color: var(--muted); text-align: center; }
