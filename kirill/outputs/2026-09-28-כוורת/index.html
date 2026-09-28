@@ -15,6 +15,8 @@
   --uriel-green: #7cb928;
   --shadow: 0 1px 2px rgba(20,13,65,0.06), 0 8px 24px rgba(20,13,65,0.06);
   --radius: 16px;
+  --note-bg: #eef7de;
+  --note-ink: #4a7a12;
   --font-head: 'Assistant', -apple-system, "Segoe UI", sans-serif;
   --font-body: 'Heebo', -apple-system, "Segoe UI", sans-serif;
   color-scheme: light;
@@ -24,6 +26,7 @@
     --bg: #100a30; --surface: #1a1350; --surface-alt: #251a63;
     --ink: #f3f1ff; --ink-soft: #c6c0ea; --muted: #948ec2; --line: #382d78;
     --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+    --note-bg: #23331a; --note-ink: #a7d66b;
     color-scheme: dark;
   }
 }
@@ -31,6 +34,7 @@
   --bg: #100a30; --surface: #1a1350; --surface-alt: #251a63;
   --ink: #f3f1ff; --ink-soft: #c6c0ea; --muted: #948ec2; --line: #382d78;
   --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+  --note-bg: #23331a; --note-ink: #a7d66b;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -58,19 +62,26 @@ body { background: var(--bg); color: var(--ink); font-family: var(--font-body); 
 .grid + .sub-head { margin-top: 28px; }
 
 .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column; }
-.card .shot { aspect-ratio: 4/5; background: var(--surface-alt); overflow: hidden; }
+.card .shot { position: relative; aspect-ratio: 4/5; background: var(--surface-alt); overflow: hidden; }
 .card .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.card .shot.contain img { object-fit: contain; padding: 14px; }
 .card .shot.missing { display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 12px; text-align: center; padding: 12px; }
+
+.card .shot .pack-badge { position: absolute; left: 10px; bottom: 10px; display: flex; align-items: center; gap: 6px; background: var(--uriel-green); color: #10230a; font-family: var(--font-head); font-weight: 800; font-size: 12px; padding: 5px 10px 5px 8px; border-radius: 999px; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
+.card .shot .pack-badge .n { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; background: #10230a; color: #fff; font-size: 11px; }
 
 .card .swatches { display: flex; flex-wrap: wrap; gap: 6px; padding: 12px; background: var(--surface-alt); }
 .card .swatches .sw { flex: 0 0 auto; width: 52px; display: flex; flex-direction: column; align-items: center; gap: 3px; }
 .card .swatches .sw .thumb { width: 52px; height: 52px; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); }
 .card .swatches .sw img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .card .swatches .sw .cname { font-size: 9.5px; color: var(--muted); text-align: center; line-height: 1.15; }
+.card .swatches .sw.active .thumb { border: 2px solid var(--uriel-green); }
 
 .card .body { padding: 14px 14px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
 .card h3 { margin: 0; font-family: var(--font-head); font-weight: 700; font-size: 15px; line-height: 1.3; }
+.card .sku-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 .card .sku { font-family: ui-monospace, "SF Mono", Consolas, monospace; background: var(--surface-alt); color: var(--ink-soft); padding: 2px 7px; border-radius: 6px; font-size: 11.5px; align-self: flex-start; }
+.card .note { font-family: var(--font-head); font-weight: 700; background: var(--note-bg); color: var(--note-ink); padding: 2px 8px; border-radius: 6px; font-size: 11px; }
 .card .prices { margin-top: auto; padding-top: 8px; border-top: 1px dashed var(--line); display: flex; flex-direction: column; gap: 4px; }
 .card .price-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; }
 .card .price-row .label { color: var(--muted); font-size: 12px; }
@@ -112,15 +123,17 @@ body { background: var(--bg); color: var(--ink); font-family: var(--font-body); 
 function ils(n) { return n == null ? '—' : '₪' + n.toLocaleString('he-IL', {minimumFractionDigits: 2, maximumFractionDigits: 2}); }
 
 function card(p) {
+  const containCls = p.contain ? ' contain' : '';
   const shot = p.img
-    ? `<div class="shot"><img src="images/${p.img}" alt="${p.product}"></div>`
+    ? `<div class="shot${containCls}"><img src="images/${p.img}" alt="${p.product}"></div>`
     : `<div class="shot missing">אין תמונה זמינה באתר</div>`;
+  const note = p.note ? `<span class="note">${p.note}</span>` : '';
   return `
   <div class="card">
     ${shot}
     <div class="body">
       <h3>${p.product}</h3>
-      <span class="sku">${p.base}</span>
+      <div class="sku-row"><span class="sku">${p.base}</span>${note}</div>
       <div class="prices">
         <div class="price-row consumer"><span class="label">מחיר צרכן</span><span class="val">${ils(p.consumer)}</span></div>
         <div class="price-row yarpa"><span class="label">מחיר ירפא</span><span class="val">${ils(p.yarpa)}</span></div>
@@ -129,14 +142,19 @@ function card(p) {
   </div>`;
 }
 
-function cardMulti(p) {
-  const swatches = p.colors.map(c => `
-    <div class="sw">
+function cardFeatured(p) {
+  const main = p.colors[0];
+  const badge = p.pack
+    ? `<div class="pack-badge"><span class="n">${p.pack}</span><span>יח' באריזה</span></div>`
+    : '';
+  const swatches = p.colors.map((c, i) => `
+    <div class="sw${i === 0 ? ' active' : ''}">
       <div class="thumb"><img src="images/${c.img}" alt="${p.product} - ${c.name}"></div>
       <div class="cname">${c.name}</div>
     </div>`).join('');
   return `
   <div class="card">
+    <div class="shot"><img src="images/${main.img}" alt="${p.product} - ${main.name}">${badge}</div>
     <div class="swatches">${swatches}</div>
     <div class="body">
       <h3>${p.product}</h3>
@@ -176,7 +194,7 @@ const orthoMisc = [
 
 const sport = [
   {base:'SC25', field:'ספורט', product:'ספורט', consumer:199.9, yarpa:124.93125343732814, img:'SC25.jpg'},
-  {base:'SC35', field:'ספורט', product:'ספורט', consumer:199.9, yarpa:124.93125343732814, img:'SC35.jpg'},
+  {base:'SC35', field:'ספורט', product:'ספורט', consumer:199.9, yarpa:124.93125343732814, img:'SC35.jpg', note:'L / R'},
   {base:'SC39', field:'ספורט', product:'ספורט', consumer:349.9, yarpa:218.6765661716914, img:'SC39.jpg'},
   {base:'SC422', field:'ספורט', product:'ספורט', consumer:299.9, yarpa:187.4281285935703, img:'SC422.jpg'},
   {base:'SC95', field:'ספורט', product:'ספורט', consumer:199.9, yarpa:124.93125343732814, img:'SC95.jpg'},
@@ -184,19 +202,21 @@ const sport = [
 ];
 
 const feet = [
-  {base:'379', field:'כף רגל : מדרסים', product:"מדרסי ג'ל MS", consumer:252.9, yarpa:158.0545972701365, img:'379MS.png'},
-  {base:'379', field:'כף רגל : מדרסים', product:"מדרסי ג'ל CO", consumer:252.9, yarpa:158.0545972701365, img:'379CO.png'},
-  {base:'379', field:'כף רגל : מדרסים', product:"מדרסי ג'ל WO", consumer:252.9, yarpa:158.0545972701365, img:'379WO.png'},
+  {base:'379', field:'כף רגל : מדרסים', product:"מדרסי ג'ל MS", consumer:252.9, yarpa:158.0545972701365, img:'379MS.png', contain:true},
+  {base:'379', field:'כף רגל : מדרסים', product:"מדרסי ג'ל CO", consumer:252.9, yarpa:158.0545972701365, img:'379CO.png', contain:true},
+  {base:'379', field:'כף רגל : מדרסים', product:"מדרסי ג'ל WO", consumer:252.9, yarpa:158.0545972701365, img:'379WO.png', contain:true},
 ];
 
 const tapes = [
   {base:'806CB', field:'טייפים', product:'תחבושת נצמדת', consumer:26.9, yarpa:16.811659417029148, colors:[
     {name:'שחור', img:'806CB-B.jpg'}, {name:'קרם', img:'806CB-C.jpg'}, {name:'ירוק', img:'806CB-GR.jpg'}, {name:'ורוד פוקסיה', img:'806CB-P.jpg'},
   ]},
-  {base:'807CB', field:'טייפים', product:'תחבושת נצמדת', consumer:26.9, yarpa:16.811659417029148, colors:[
-    {name:'ורוד פוקסיה', img:'807CB-P.jpg'}, {name:'כחול', img:'807CB-BL.jpg'}, {name:'קרם', img:'807CB-C.jpg'}, {name:'שחור', img:'807CB-B.jpg'},
+  {base:'807CB', field:'טייפים', product:'תחבושת נצמדת', consumer:26.9, yarpa:16.811659417029148, pack:2, colors:[
+    {name:'שחור', img:'807CB-B.jpg'}, {name:'ורוד פוקסיה', img:'807CB-P.jpg'}, {name:'כחול', img:'807CB-BL.jpg'}, {name:'קרם', img:'807CB-C.jpg'},
   ]},
-  {base:'808KT', field:'טייפים', product:'קיניזיו טייפ', consumer:100.9018, yarpa:63.06047197640118, img:'808KT.jpg'},
+  {base:'808KT', field:'טייפים', product:'קיניזיו טייפ', consumer:100.9018, yarpa:63.06047197640118, colors:[
+    {name:'שחור', img:'808KT-B.jpg'}, {name:'קרם', img:'808KT-C.jpg'}, {name:'כחול', img:'808KT-BL.jpg'}, {name:'ורוד פוקסיה', img:'808KT-P.jpg'},
+  ]},
 ];
 
 document.getElementById('grid-35').innerHTML = family35.map(card).join('');
@@ -205,7 +225,7 @@ document.getElementById('grid-95').innerHTML = family95.map(card).join('');
 document.getElementById('grid-ortho-misc').innerHTML = orthoMisc.map(card).join('');
 document.getElementById('grid-sport').innerHTML = sport.map(card).join('');
 document.getElementById('grid-feet').innerHTML = feet.map(card).join('');
-document.getElementById('grid-tapes').innerHTML = tapes.map(p => p.colors ? cardMulti(p) : card(p)).join('');
+document.getElementById('grid-tapes').innerHTML = tapes.map(p => p.colors ? cardFeatured(p) : card(p)).join('');
 
 const orthoCount = family35.length + family45.length + family95.length + orthoMisc.length;
 document.getElementById('count-ortho').textContent = orthoCount + ' מוצרים';
