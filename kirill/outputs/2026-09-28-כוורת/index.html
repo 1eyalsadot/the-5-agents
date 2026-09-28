@@ -87,6 +87,14 @@ body { background: var(--bg); color: var(--ink); font-family: var(--font-body); 
 .card .price-row .label { color: var(--muted); font-size: 12px; }
 .card .price-row.consumer .val { font-family: var(--font-head); font-weight: 800; font-size: 18px; color: var(--ink); font-variant-numeric: tabular-nums; }
 .card .price-row.yarpa .val { font-family: var(--font-head); font-weight: 800; font-size: 16px; color: var(--uriel-green); font-variant-numeric: tabular-nums; }
+
+@media print {
+  .page { max-width: none; padding: 0 6mm; }
+  .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .cat-band { break-after: avoid; }
+  .sub-head { break-after: avoid; }
+  .card { break-inside: avoid; }
+}
 </style>
 
 <div class="page">
