@@ -70,9 +70,9 @@ body { background: var(--bg); color: var(--ink); font-family: var(--font-body); 
 .card .shot .pack-badge { position: absolute; left: 10px; bottom: 10px; z-index: 2; display: flex; align-items: center; gap: 6px; background: var(--uriel-green); color: #10230a; font-family: var(--font-head); font-weight: 800; font-size: 12px; padding: 5px 10px 5px 8px; border-radius: 999px; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
 .card .shot .pack-badge .n { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; background: #10230a; color: #fff; font-size: 11px; }
 
-.card .shot.stacked img { position: absolute; width: auto; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 10px 18px rgba(0,0,0,0.28); }
-.card .shot.stacked img.roll-back { top: 6%; right: 8%; width: 52%; transform: rotate(-6deg); }
-.card .shot.stacked img.roll-front { bottom: 8%; left: 6%; width: 68%; transform: rotate(4deg); }
+.card .shot.stacked img { position: absolute; left: 50%; width: auto; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 8px 16px rgba(0,0,0,0.3); }
+.card .shot.stacked img.roll-back { top: 4%; width: 58%; transform: translateX(-50%) rotate(-1.5deg); }
+.card .shot.stacked img.roll-front { bottom: 4%; width: 62%; transform: translateX(-50%) rotate(1.5deg); z-index: 1; }
 
 .card .swatches { display: flex; flex-wrap: wrap; gap: 6px; padding: 12px; background: var(--surface-alt); }
 .card .swatches .sw { flex: 0 0 auto; width: 52px; display: flex; flex-direction: column; align-items: center; gap: 3px; }
