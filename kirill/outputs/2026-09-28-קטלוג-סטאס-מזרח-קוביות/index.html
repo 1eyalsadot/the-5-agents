@@ -242,7 +242,7 @@ function card(p) {
   const promoBadge = p.promoLabel ? `<div class="promo-badge">${p.promoLabel}</div>` : '';
   return `
   <div class="card">
-    <div class="shot">${promoBadge}<img src="images/${p.img}" alt="${p.name}" loading="lazy"></div>
+    <div class="shot">${promoBadge}<img src="images/${p.img}" alt="${p.name}"></div>
     <div class="body">
       <h3>${p.name}</h3>
       <div class="sku-row"><span class="sku">${p.sku}</span></div>

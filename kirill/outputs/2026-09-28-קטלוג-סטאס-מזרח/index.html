@@ -178,7 +178,7 @@ function row(p) {
   const barcodeRow = p.barcode ? `<div class="barcode">ברקוד ${p.barcode}</div>` : '';
   return `
   <div class="row">
-    <div class="shot">${promo}<img src="images/${p.img}" alt="${p.name}" loading="lazy"></div>
+    <div class="shot">${promo}<img src="images/${p.img}" alt="${p.name}"></div>
     <div class="name-cell">
       <h3>${p.name}</h3>
       <span class="sku">${p.sku}</span>
