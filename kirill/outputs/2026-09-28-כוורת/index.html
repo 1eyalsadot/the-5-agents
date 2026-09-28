@@ -1,0 +1,147 @@
+<title>כוורת</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@500;700;800&family=Heebo:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #eef1f6;
+  --surface: #ffffff;
+  --surface-alt: #e4e8f0;
+  --ink: #140d41;
+  --ink-soft: #514c78;
+  --muted: #85809f;
+  --line: #dadfec;
+  --uriel-green: #7cb928;
+  --shadow: 0 1px 2px rgba(20,13,65,0.06), 0 8px 24px rgba(20,13,65,0.06);
+  --radius: 16px;
+  --font-head: 'Assistant', -apple-system, "Segoe UI", sans-serif;
+  --font-body: 'Heebo', -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #100a30; --surface: #1a1350; --surface-alt: #251a63;
+    --ink: #f3f1ff; --ink-soft: #c6c0ea; --muted: #948ec2; --line: #382d78;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #100a30; --surface: #1a1350; --surface-alt: #251a63;
+  --ink: #f3f1ff; --ink-soft: #c6c0ea; --muted: #948ec2; --line: #382d78;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5; direction: rtl; }
+::selection { background: var(--uriel-green); color: #fff; }
+.page { max-width: 1240px; margin: 0 auto; padding: 28px 20px 64px; }
+
+.topbar { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-bottom: 20px; margin-bottom: 22px; border-bottom: 1px solid var(--line); }
+.brand .mark { font-family: var(--font-head); font-weight: 800; font-size: 26px; }
+.stats { font-size: 13px; color: var(--muted); }
+.stats b { color: var(--ink); font-size: 15px; }
+
+.cat-band { margin: 34px 0 14px; padding: 11px 18px; background: var(--ink); border-radius: 10px; display: flex; align-items: center; justify-content: space-between; }
+.cat-band:first-of-type { margin-top: 0; }
+.cat-band h2 { margin: 0; font-family: var(--font-head); font-weight: 700; font-size: 15px; color: var(--uriel-green); }
+.cat-band .cat-count { font-size: 12px; color: var(--ink-soft); }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column; }
+.card .shot { aspect-ratio: 4/5; background: var(--surface-alt); overflow: hidden; }
+.card .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.card .shot.missing { display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 12px; text-align: center; padding: 12px; }
+.card .body { padding: 14px 14px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.card h3 { margin: 0; font-family: var(--font-head); font-weight: 700; font-size: 15px; line-height: 1.3; }
+.card .sku { font-family: ui-monospace, "SF Mono", Consolas, monospace; background: var(--surface-alt); color: var(--ink-soft); padding: 2px 7px; border-radius: 6px; font-size: 11.5px; align-self: flex-start; }
+.card .prices { margin-top: auto; padding-top: 8px; border-top: 1px dashed var(--line); display: flex; flex-direction: column; gap: 4px; }
+.card .price-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; }
+.card .price-row .label { color: var(--muted); font-size: 12px; }
+.card .price-row.consumer .val { font-family: var(--font-head); font-weight: 800; font-size: 18px; color: var(--ink); font-variant-numeric: tabular-nums; }
+.card .price-row.yarpa .val { font-family: var(--font-head); font-weight: 800; font-size: 16px; color: var(--uriel-green); font-variant-numeric: tabular-nums; }
+
+footer { margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 12px; color: var(--muted); text-align: center; }
+</style>
+
+<div class="page">
+  <div class="topbar">
+    <div class="brand"><div class="mark">כוורת</div></div>
+    <div class="stats">סה"כ <b>25</b> מוצרים</div>
+  </div>
+
+  <div class="cat-band"><h2>אורתופדיה</h2><span class="cat-count" id="count-ortho"></span></div>
+  <div class="grid" id="grid-ortho"></div>
+
+  <div class="cat-band"><h2>כף רגל : מדרסים</h2><span class="cat-count" id="count-feet"></span></div>
+  <div class="grid" id="grid-feet"></div>
+
+  <div class="cat-band"><h2>טייפים</h2><span class="cat-count" id="count-tapes"></span></div>
+  <div class="grid" id="grid-tapes"></div>
+</div>
+
+<script>
+function ils(n) { return n == null ? '—' : '₪' + n.toLocaleString('he-IL', {minimumFractionDigits: 2, maximumFractionDigits: 2}); }
+
+function card(p) {
+  const shot = p.img
+    ? `<div class="shot"><img src="images/${p.img}" alt="${p.product}"></div>`
+    : `<div class="shot missing">אין תמונה זמינה באתר</div>`;
+  return `
+  <div class="card">
+    ${shot}
+    <div class="body">
+      <h3>${p.product}</h3>
+      <span class="sku">${p.base}</span>
+      <div class="prices">
+        <div class="price-row consumer"><span class="label">מחיר צרכן</span><span class="val">${ils(p.consumer)}</span></div>
+        <div class="price-row yarpa"><span class="label">מחיר ירפא</span><span class="val">${ils(p.yarpa)}</span></div>
+      </div>
+    </div>
+  </div>`;
+}
+
+const ortho = [
+  {base:'35', field:'אורתופדיה', product:'מגיני קרסול', consumer:65.9, yarpa:41.1854407279636, img:'35.jpg'},
+  {base:'35B', field:'אורתופדיה', product:'מגיני קרסול', consumer:65.9, yarpa:41.1854407279636, img:'35B.jpg'},
+  {base:'35C', field:'אורתופדיה', product:'מגיני קרסול', consumer:65.9, yarpa:41.1854407279636, img:'35C.jpg'},
+  {base:'45', field:'אורתופדיה', product:'מגיני ברך', consumer:62.9, yarpa:39.310534473276334, img:'45.jpg'},
+  {base:'45B', field:'אורתופדיה', product:'מגיני ברך', consumer:65.9, yarpa:41.1854407279636, img:'45B.jpg'},
+  {base:'45EC', field:'אורתופדיה', product:'מגיני ברך', consumer:79.9, yarpa:49.93500324983751, img:'45EC.jpg'},
+  {base:'95', field:'אורתופדיה', product:'מגיני מרפק', consumer:65.9, yarpa:41.1854407279636, img:'95.jpg'},
+  {base:'95B', field:'אורתופדיה', product:'מגיני מרפק', consumer:65.9, yarpa:41.1854407279636, img:'95B.jpg'},
+  {base:'95C', field:'אורתופדיה', product:'מגיני מרפק', consumer:65.9, yarpa:41.1854407279636, img:'95C.jpg'},
+  {base:'T25B', field:'אורתופדיה', product:'שורש כף יד', consumer:99.9, yarpa:62.43437828108595, img:'T25B.jpg'},
+  {base:'T40B 0', field:'אורתופדיה', product:'רצועות לפיקה', consumer:181.897, yarpa:113.67994100294985, img:'T40B.jpg'},
+  {base:'91B', field:'אורתופדיה', product:'טניס אלבו', consumer:179.9, yarpa:112.43187840607969, img:'91B.jpg'},
+  {base:'AC07', field:'אורתופדיה', product:'רצועת גב תחתון', consumer:199.9038, yarpa:124.93362831858406, img:'AC07.jpg'},
+  {base:'SC25', field:'אורתופדיה', product:'ספורט', consumer:199.9, yarpa:124.93125343732814, img:'SC25.jpg'},
+  {base:'SC35', field:'אורתופדיה', product:'ספורט', consumer:199.9, yarpa:124.93125343732814, img:'SC35.jpg'},
+  {base:'SC39', field:'אורתופדיה', product:'ספורט', consumer:349.9, yarpa:218.6765661716914, img:'SC39.jpg'},
+  {base:'SC422', field:'אורתופדיה', product:'ספורט', consumer:299.9, yarpa:187.4281285935703, img:'SC422.jpg'},
+  {base:'SC95', field:'אורתופדיה', product:'ספורט', consumer:199.9, yarpa:124.93125343732814, img:'SC95.jpg'},
+  {base:'SC34+', field:'אורתופדיה', product:'ספורט', consumer:299.9, yarpa:187.4281285935703, img:null},
+];
+
+const feet = [
+  {base:'379', field:'כף רגל : מדרסים', product:"מדרסי ג'ל MS", consumer:252.9, yarpa:158.0545972701365, img:'379MS.png'},
+  {base:'379', field:'כף רגל : מדרסים', product:"מדרסי ג'ל CO", consumer:252.9, yarpa:158.0545972701365, img:'379CO.png'},
+  {base:'379', field:'כף רגל : מדרסים', product:"מדרסי ג'ל WO", consumer:252.9, yarpa:158.0545972701365, img:'379WO.png'},
+];
+
+const tapes = [
+  {base:'806CB', field:'טייפים', product:'תחבושת נצמדת', consumer:26.9, yarpa:16.811659417029148, img:'806CB.jpg'},
+  {base:'807CB', field:'טייפים', product:'תחבושת נצמדת', consumer:26.9, yarpa:16.811659417029148, img:'807CB.jpg'},
+  {base:'808KT', field:'טייפים', product:'קיניזיו טייפ', consumer:100.9018, yarpa:63.06047197640118, img:'808KT.jpg'},
+];
+
+document.getElementById('grid-ortho').innerHTML = ortho.map(card).join('');
+document.getElementById('grid-feet').innerHTML = feet.map(card).join('');
+document.getElementById('grid-tapes').innerHTML = tapes.map(card).join('');
+document.getElementById('count-ortho').textContent = ortho.length + ' מוצרים';
+document.getElementById('count-feet').textContent = feet.length + ' מוצרים';
+document.getElementById('count-tapes').textContent = tapes.length + ' מוצרים';
+</script>
