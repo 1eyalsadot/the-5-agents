@@ -100,7 +100,7 @@ body { background: var(--bg); color: var(--ink); font-family: var(--font-body); 
 <div class="page">
   <div class="topbar">
     <div class="brand"><div class="mark">כוורת</div></div>
-    <div class="stats">סה"כ <b>25</b> מוצרים</div>
+    <div class="stats">סה"כ <b>28</b> מוצרים</div>
   </div>
 
   <div class="cat-band"><h2>אורתופדיה</h2><span class="cat-count" id="count-ortho"></span></div>
@@ -125,6 +125,9 @@ body { background: var(--bg); color: var(--ink); font-family: var(--font-body); 
 
   <div class="cat-band"><h2>טייפים</h2><span class="cat-count" id="count-tapes"></span></div>
   <div class="grid" id="grid-tapes"></div>
+
+  <div class="cat-band"><h2>כף רגל : קוסמטיקה</h2><span class="cat-count" id="count-cosmetics"></span></div>
+  <div class="grid" id="grid-cosmetics"></div>
 </div>
 
 <script>
@@ -228,6 +231,12 @@ const tapes = [
   ]},
 ];
 
+const cosmetics = [
+  {base:'FC333', field:'כף רגל : קוסמטיקה', product:'תרסיס דיאודורנט אנטי-בקטריאלי לנעל', consumer:45.9, yarpa:28.686065696715165, img:'FC333.jpg'},
+  {base:'FC334', field:'כף רגל : קוסמטיקה', product:'תרסיס דאודורנט לכף הרגל', consumer:49.9, yarpa:31.18594070296485, img:'FC334.png'},
+  {base:'FC342', field:'כף רגל : קוסמטיקה', product:'נוזל לציפורן חודרנית', consumer:77.9, yarpa:48.68506574671267, img:'FC342.jpg'},
+];
+
 document.getElementById('grid-35').innerHTML = family35.map(card).join('');
 document.getElementById('grid-45').innerHTML = family45.map(card).join('');
 document.getElementById('grid-95').innerHTML = family95.map(card).join('');
@@ -235,10 +244,12 @@ document.getElementById('grid-ortho-misc').innerHTML = orthoMisc.map(card).join(
 document.getElementById('grid-sport').innerHTML = sport.map(card).join('');
 document.getElementById('grid-feet').innerHTML = feet.map(card).join('');
 document.getElementById('grid-tapes').innerHTML = tapes.map(p => p.colors ? cardFeatured(p) : card(p)).join('');
+document.getElementById('grid-cosmetics').innerHTML = cosmetics.map(card).join('');
 
 const orthoCount = family35.length + family45.length + family95.length + orthoMisc.length;
 document.getElementById('count-ortho').textContent = orthoCount + ' מוצרים';
 document.getElementById('count-sport').textContent = sport.length + ' מוצרים';
 document.getElementById('count-feet').textContent = feet.length + ' מוצרים';
 document.getElementById('count-tapes').textContent = tapes.length + ' מוצרים';
+document.getElementById('count-cosmetics').textContent = cosmetics.length + ' מוצרים';
 </script>
