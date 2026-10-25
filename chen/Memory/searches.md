@@ -29,4 +29,19 @@
 - [כללית: עמוד המכרזים](https://www.clalit.co.il/he/info/tenders/Pages/default.aspx), [מכבי](https://www.maccabi4u.co.il/new/bids/), [לאומית](https://www.leumit.co.il/bids/publictenders/), [רמב"ם](https://www.rambam.org.il/departmentsandclinics/purchasing-department/public-tenders/), [איכילוב](https://www.tasmc.org.il/all/michrazim-health-corp/) - איכות: ⭐⭐⭐⭐ - לא נמצא בהם מכרז אורתופדי פתוח
 **נבחר:** mr.gov.il (מקור ראשוני רשמי). אין מקור יחיד: הקובץ מרכז את כל המכרזים הפתוחים, ובנוסף רשימת מכרזים שנסגרו ורשימת מקורות שלא היו נגישים (מאוחדת, הדסה, שערי צדק)
 **קובץ ב-Content:** 2026-10-04-orthopedic-tenders-israel.md
+## 2026-10-25 12:00 | סריקת מכרזים פתוחים בישראל: ציוד אורתופדי (שתלים, עמוד שדרה, סדים, מתכלים, שיקום)
+**מילות מפתח:** מכרז, אורתופדי, אורטופדי, שתלים, משתלים, עמוד שדרה, ספיין, סדים, מחוכים, שיקום, שיבא, איכילוב, רמב"ם, כללית, מכבי, מאוחדת, לאומית, הדסה, שערי צדק, אסותא, משרד הביטחון, orthopedic tenders Israel
+**שאילתות שנעשו:** "מכרז ציוד אורתופדי 2026", "מכרז שתלים אורתופדיים בית חולים 2026", mr.gov.il text+archive:false על: אורתופד/אורטופד/שתל/משתלים/עמוד שדרה/פרוצדורה/ניתוח/ברגים/פלטות/מסמר/קיבוע/טראומה/ברך/ירך/כתף/גבס/סדים/שיקום/כסאות גלגלים/ארתרוסקופ/שיבא/סוראסקי/הקריה הרפואית, חיפושי דומיין: leumit, meuhedet, maccabi4u, hadassah, szmc, assuta, mod.gov.il
+**מקורות שנמצאו:**
+- [שיבא 4000622904 פרוצדורה מסמר ארטרודיס](https://mr.gov.il/ilgstorefront/he/p/4000622904) - איכות: ⭐⭐⭐⭐⭐ - פתוח, עד 23/11/2026 11:00
+- [שיבא 4000622901 פרוצדורה דיסטל רדיוס](https://mr.gov.il/ilgstorefront/he/p/4000622901) - איכות: ⭐⭐⭐⭐⭐ - פתוח, עד 16/11/2026 11:00
+- [מאוחדת: קול קורא למחוכים לעקמת (08/2025)](https://www.meuhedet.co.il/media/8453/מאוחדת-קול-קורא-לאספקת-מחוכים-לעקמת-825.pdf) - איכות: ⭐⭐⭐ - אין מועד הגשה, הסטטוס לא אומת
+- [שיבא 4000621820 סקשן גב](https://mr.gov.il/ilgstorefront/he/p/4000621820) - איכות: ⭐⭐⭐⭐ - נסגר ב-19/10. בחוברת אין מפרט (פריט חד-פעמי), והפריטים ב-Excel שלא נקרא
+- [כללית public_refui / public_equipment / mkomi_hospital](https://www.clalit.co.il/he/info/tenders/Pages/default.aspx) - איכות: ⭐⭐⭐⭐ - אין מכרז אורתופדי פתוח
+- [מכבי bids](https://www.maccabi4u.co.il/new/bids/) - איכות: ⭐⭐⭐ - 10 מוצגות, "טען עוד" חסום
+- [לאומית publictenders](https://www.leumit.co.il/bids/publictenders/) - איכות: ⭐⭐⭐ - 5 מתוך 13. 7488/26 (מנופי שיקום) נסגר ב-02/06/2026
+- [איכילוב, תאגיד הבריאות](https://www.tasmc.org.il/all/michrazim-health-corp/) - איכות: ⭐⭐⭐⭐ - אין מכרז אורתופדי פתוח
+- [משרד הביטחון BalamList](https://www.online.mod.gov.il/Online2016/Pages/General/Balam/BalamList.aspx?Reset=1) - איכות: ⭐⭐⭐ - נקרא עמוד 1 מתוך 8 בלבד (postback)
+**נבחר:** שני מכרזי שיבא ב-mr.gov.il. אלה המכרזים האורתופדיים היחידים שאומתו כפתוחים. חסומים: הדסה (403), שערי צדק ואסותא (אין עמוד ציבורי), מאוחדת (JS), מכבי ("טען עוד"), לאומית (5/13), משרד הביטחון (עימוד postback). טיפ: ב-mr.gov.il לחפש עם `?q=%3AupdateDate%3Aarchive%3Afalse&text=<מילה>&s=TENDER`
+**קובץ ב-Content:** 2026-10-25-orthopedic-tenders-israel.md
 ---
