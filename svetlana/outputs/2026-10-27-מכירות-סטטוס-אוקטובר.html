@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>מכירות — סטטוס אוקטובר</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@600;700;800&family=Inter:wght@400;500;600&display=swap">
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f3f4f8;
+    --surface: #ffffff;
+    --ink: #0b1733;
+    --ink-soft: #4a5572;
+    --muted: #7c84a0;
+    --line: #e3e6ef;
+    --series-actual: #2A4D8F;
+    --series-target: #E0A62B;
+    --shadow: 0 1px 2px rgba(11,23,51,0.06), 0 8px 24px rgba(11,23,51,0.06);
+    --radius: 16px;
+    --font-head: 'Assistant', -apple-system, "Segoe UI", sans-serif;
+    --font-body: 'Inter', -apple-system, "Segoe UI", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0e1222; --surface: #171c33; --ink: #f1f3fb; --ink-soft: #c3c9e0;
+      --muted: #8992b3; --line: #2b3153;
+      --series-actual: #5B8DEF; --series-target: #C98500;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0e1222; --surface: #171c33; --ink: #f1f3fb; --ink-soft: #c3c9e0;
+    --muted: #8992b3; --line: #2b3153;
+    --series-actual: #5B8DEF; --series-target: #C98500;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    padding: 24px 16px 40px;
+  }
+  .page {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 28px 28px 20px;
+  }
+  .title {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: clamp(22px, 3.2vw, 30px);
+    color: var(--ink);
+    margin: 0 0 4px;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0 0 20px;
+  }
+
+  .legend {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .swatch { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+  .swatch.actual { background: var(--series-actual); }
+  .swatch.target { background: var(--series-target); }
+
+  .chart-wrap { position: relative; width: 100%; }
+  .chart-svg { width: 100%; height: auto; display: block; overflow: visible; }
+
+  .gridline { stroke: var(--line); stroke-width: 1; }
+  .baseline { stroke: var(--line); stroke-width: 1.5; }
+  .axis-label { font-family: var(--font-body); font-size: 11px; fill: var(--muted); }
+  .cat-label { font-family: var(--font-body); font-size: 11px; fill: var(--ink-soft); }
+
+  .bar-actual { fill: var(--series-actual); }
+  .bar-target { fill: var(--series-target); }
+  .bar { transition: opacity 0.15s ease; }
+  .bar-group:hover .bar { opacity: 0.75; }
+  .bar-group:hover .bar-hovered { opacity: 1; }
+
+  .bar-label {
+    font-family: var(--font-body);
+    font-size: 10.5px;
+    font-weight: 600;
+    fill: var(--ink-soft);
+  }
+
+  .hit-target { cursor: pointer; }
+
+  .tooltip {
+    position: absolute;
+    pointer-events: none;
+    background: var(--ink);
+    color: var(--surface);
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    line-height: 1.5;
+    padding: 8px 12px;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    opacity: 0;
+    transform: translate(-50%, -8px);
+    transition: opacity 0.1s ease;
+    white-space: nowrap;
+    z-index: 10;
+  }
+  .tooltip.visible { opacity: 1; }
+  .tooltip b { font-weight: 700; }
+  .tooltip .tt-row { display: flex; justify-content: space-between; gap: 14px; }
+  .tooltip .tt-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-left: 6px; }
+
+  .stat-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 10px 16px;
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+  }
+  .stat-label { font-size: 13px; color: var(--muted); }
+  .stat-number {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 34px;
+    color: var(--ink);
+  }
+  .stat-pct {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 34px;
+    color: var(--series-target);
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 18px;
+    padding-top: 14px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .brand { font-family: var(--font-head); font-weight: 800; letter-spacing: 0.08em; color: var(--ink-soft); }
+
+  @media (max-width: 640px) {
+    .card { padding: 20px 16px 16px; }
+    .stat-number, .stat-pct { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <h1 class="title">מכירות – סטטוס אוקטובר</h1>
+      <p class="subtitle">בפועל מול מטרה לפי לקוח · אוקטובר 2026</p>
+
+      <div class="legend">
+        <span class="legend-item"><span class="swatch actual"></span>בפועל</span>
+        <span class="legend-item"><span class="swatch target"></span>מטרה</span>
+      </div>
+
+      <div class="chart-wrap" id="chartWrap">
+        <svg viewBox="0 0 1180 420" class="chart-svg" role="img" aria-label="גרף עמודות: בפועל מול מטרה לפי לקוח, אוקטובר 2026">
+  <g class="gridlines"><line x1="56" y1="364.0" x2="1156" y2="364.0" class="gridline" /><text x="1164" y="368.0" class="axis-label" text-anchor="start">0</text><line x1="56" y1="296.0" x2="1156" y2="296.0" class="gridline" /><text x="1164" y="300.0" class="axis-label" text-anchor="start">400K</text><line x1="56" y1="228.0" x2="1156" y2="228.0" class="gridline" /><text x="1164" y="232.0" class="axis-label" text-anchor="start">800K</text><line x1="56" y1="160.0" x2="1156" y2="160.0" class="gridline" /><text x="1164" y="164.0" class="axis-label" text-anchor="start">1,200K</text><line x1="56" y1="92.0" x2="1156" y2="92.0" class="gridline" /><text x="1164" y="96.0" class="axis-label" text-anchor="start">1,600K</text><line x1="56" y1="24.0" x2="1156" y2="24.0" class="gridline" /><text x="1164" y="28.0" class="axis-label" text-anchor="start">2,000K</text></g>
+  <line x1="56" y1="364" x2="1156" y2="364" class="baseline" />
+  
+      <g class="bar-group" data-label="Life" data-actual="155000" data-target="200000">
+        <rect class="bar bar-target" x="77.8" y="330.0" width="22" height="34.0" rx="4" ry="4" />
+        <rect class="bar bar-actual" x="103.8" y="337.6" width="22" height="26.4" rx="4" ry="4" />
+        <text class="bar-label" x="77.8" y="324.0" text-anchor="middle">200K</text>
+        <text class="bar-label bar-label-actual" x="125.8" y="331.6" text-anchor="middle">155K</text>
+        <rect class="hit-target" x="75.8" y="24" width="52.0" height="340" fill="transparent" />
+      </g>
+      <g class="bar-group" data-label="סופרפארם" data-actual="500000" data-target="550000">
+        <rect class="bar bar-target" x="169.5" y="270.5" width="22" height="93.5" rx="4" ry="4" />
+        <rect class="bar bar-actual" x="195.5" y="279.0" width="22" height="85.0" rx="4" ry="4" />
+        <text class="bar-label" x="169.5" y="264.5" text-anchor="middle">550K</text>
+        <text class="bar-label bar-label-actual" x="217.5" y="273.0" text-anchor="middle">500K</text>
+        <rect class="hit-target" x="167.5" y="24" width="52.0" height="340" fill="transparent" />
+      </g>
+      <g class="bar-group" data-label="BE" data-actual="100000" data-target="100000">
+        <rect class="bar bar-target" x="261.2" y="347.0" width="22" height="17.0" rx="4" ry="4" />
+        <rect class="bar bar-actual" x="287.2" y="347.0" width="22" height="17.0" rx="4" ry="4" />
+        <text class="bar-label" x="261.2" y="341.0" text-anchor="middle">100K</text>
+        <text class="bar-label bar-label-actual" x="309.2" y="341.0" text-anchor="middle">100K</text>
+        <rect class="hit-target" x="259.2" y="24" width="52.0" height="340" fill="transparent" />
+      </g>
+      <g class="bar-group" data-label="בתי מרקחת" data-actual="150000" data-target="200000">
+        <rect class="bar bar-target" x="352.8" y="330.0" width="22" height="34.0" rx="4" ry="4" />
+        <rect class="bar bar-actual" x="378.8" y="338.5" width="22" height="25.5" rx="4" ry="4" />
+        <text class="bar-label" x="352.8" y="324.0" text-anchor="middle">200K</text>
+        <text class="bar-label bar-label-actual" x="400.8" y="332.5" text-anchor="middle">150K</text>
+        <rect class="hit-target" x="350.8" y="24" width="52.0" height="340" fill="transparent" />
+      </g>
+      <g class="bar-group" data-label="כללית" data-actual="220000" data-target="330000">
+        <rect class="bar bar-target" x="444.5" y="307.9" width="22" height="56.1" rx="4" ry="4" />
+        <rect class="bar bar-actual" x="470.5" y="326.6" width="22" height="37.4" rx="4" ry="4" />
+        <text class="bar-label" x="444.5" y="301.9" text-anchor="middle">330K</text>
+        <text class="bar-label bar-label-actual" x="492.5" y="320.6" text-anchor="middle">220K</text>
+        <rect class="hit-target" x="442.5" y="24" width="52.0" height="340" fill="transparent" />
+      </g>
+      <g class="bar-group" data-label="מאוחדת" data-actual="60000" data-target="100000">
+        <rect class="bar bar-target" x="536.2" y="347.0" width="22" height="17.0" rx="4" ry="4" />
+        <rect class="bar bar-actual" x="562.2" y="353.8" width="22" height="10.2" rx="4" ry="4" />
+        <text class="bar-label" x="536.2" y="341.0" text-anchor="middle">100K</text>
+        <text class="bar-label bar-label-actual" x="584.2" y="347.8" text-anchor="middle">60K</text>
+        <rect class="hit-target" x="534.2" y="24" width="52.0" height="340" fill="transparent" />
+      </g>
+      <g class="bar-group" data-label="אורטופדיה" data-actual="80000" data-target="100000">
+        <rect class="bar bar-target" x="627.8" y="347.0" width="22" height="17.0" rx="4" ry="4" />
+        <rect class="bar bar-actual" x="653.8" y="350.4" width="22" height="13.6" rx="4" ry="4" />
+        <text class="bar-label" x="627.8" y="341.0" text-anchor="middle">100K</text>
+        <text class="bar-label bar-label-actual" x="675.8" y="344.4" text-anchor="middle">80K</text>
+        <rect class="hit-target" x="625.8" y="24" width="52.0" height="340" fill="transparent" />
+      </g>
+      <g class="bar-group" data-label="פיזיותרפיה" data-actual="30000" data-target="25000">
+        <rect class="bar bar-target" x="719.5" y="359.8" width="22" height="4.2" rx="4" ry="4" />
+        <rect class="bar bar-actual" x="745.5" y="358.9" width="22" height="5.1" rx="4" ry="4" />
+        <text class="bar-label" x="719.5" y="353.8" text-anchor="middle">25K</text>
+        <text class="bar-label bar-label-actual" x="767.5" y="352.9" text-anchor="middle">30K</text>
+        <rect class="hit-target" x="717.5" y="24" width="52.0" height="340" fill="transparent" />
+      </g>
+      <g class="bar-group" data-label="אתר" data-actual="400000" data-target="1159557">
+        <rect class="bar bar-target" x="811.2" y="166.9" width="22" height="197.1" rx="4" ry="4" />
+        <rect class="bar bar-actual" x="837.2" y="296.0" width="22" height="68.0" rx="4" ry="4" />
+        <text class="bar-label" x="811.2" y="160.9" text-anchor="middle">1,160K</text>
+        <text class="bar-label bar-label-actual" x="859.2" y="290.0" text-anchor="middle">400K</text>
+        <rect class="hit-target" x="809.2" y="24" width="52.0" height="340" fill="transparent" />
+      </g>
+      <g class="bar-group" data-label="אמזון" data-actual="200000" data-target="321889">
+        <rect class="bar bar-target" x="902.8" y="309.3" width="22" height="54.7" rx="4" ry="4" />
+        <rect class="bar bar-actual" x="928.8" y="330.0" width="22" height="34.0" rx="4" ry="4" />
+        <text class="bar-label" x="902.8" y="303.3" text-anchor="middle">322K</text>
+        <text class="bar-label bar-label-actual" x="950.8" y="324.0" text-anchor="middle">200K</text>
+        <rect class="hit-target" x="900.8" y="24" width="52.0" height="340" fill="transparent" />
+      </g>
+      <g class="bar-group" data-label="מפיצים" data-actual="200000" data-target="550000">
+        <rect class="bar bar-target" x="994.5" y="270.5" width="22" height="93.5" rx="4" ry="4" />
+        <rect class="bar bar-actual" x="1020.5" y="330.0" width="22" height="34.0" rx="4" ry="4" />
+        <text class="bar-label" x="994.5" y="264.5" text-anchor="middle">550K</text>
+        <text class="bar-label bar-label-actual" x="1042.5" y="324.0" text-anchor="middle">200K</text>
+        <rect class="hit-target" x="992.5" y="24" width="52.0" height="340" fill="transparent" />
+      </g>
+      <g class="bar-group" data-label="אחרים" data-actual="260000" data-target="45000">
+        <rect class="bar bar-target" x="1086.2" y="356.4" width="22" height="7.6" rx="4" ry="4" />
+        <rect class="bar bar-actual" x="1112.2" y="319.8" width="22" height="44.2" rx="4" ry="4" />
+        <text class="bar-label" x="1086.2" y="350.4" text-anchor="middle">45K</text>
+        <text class="bar-label bar-label-actual" x="1134.2" y="313.8" text-anchor="middle">260K</text>
+        <rect class="hit-target" x="1084.2" y="24" width="52.0" height="340" fill="transparent" />
+      </g>
+  <g class="cat-labels"><text x="101.8" y="386" class="cat-label" text-anchor="middle">Life</text><text x="193.5" y="386" class="cat-label" text-anchor="middle">סופרפארם</text><text x="285.2" y="386" class="cat-label" text-anchor="middle">BE</text><text x="376.8" y="386" class="cat-label" text-anchor="middle">בתי מרקחת</text><text x="468.5" y="386" class="cat-label" text-anchor="middle">כללית</text><text x="560.2" y="386" class="cat-label" text-anchor="middle">מאוחדת</text><text x="651.8" y="386" class="cat-label" text-anchor="middle">אורטופדיה</text><text x="743.5" y="386" class="cat-label" text-anchor="middle">פיזיותרפיה</text><text x="835.2" y="386" class="cat-label" text-anchor="middle">אתר</text><text x="926.8" y="386" class="cat-label" text-anchor="middle">אמזון</text><text x="1018.5" y="386" class="cat-label" text-anchor="middle">מפיצים</text><text x="1110.2" y="386" class="cat-label" text-anchor="middle">אחרים</text></g>
+</svg>
+        <div class="tooltip" id="tooltip"></div>
+      </div>
+
+      <div class="stat-row">
+        <span class="stat-number">2.3 ₪ מיליון</span>
+        <span class="stat-label">אוקטובר</span>
+        <span class="stat-pct">64%</span>
+        <span class="stat-label">מיעד מטרה</span>
+      </div>
+
+      <div class="footer">
+        <span class="brand">URIEL</span>
+        <span>נוצר אוטומטית · צוות התוכן</span>
+      </div>
+    </div>
+  </div>
+
+<script>
+(function() {
+  var wrap = document.getElementById('chartWrap');
+  var tooltip = document.getElementById('tooltip');
+  var groups = wrap.querySelectorAll('.bar-group');
+
+  function fmt(n) {
+    return new Intl.NumberFormat('he-IL').format(n) + ' ₪';
+  }
+
+  groups.forEach(function(g) {
+    var actualBar = g.querySelector('.bar-actual');
+    var targetBar = g.querySelector('.bar-target');
+    actualBar.classList.add('bar-hovered-src');
+    var label = g.getAttribute('data-label');
+    var actual = parseInt(g.getAttribute('data-actual'), 10);
+    var target = parseInt(g.getAttribute('data-target'), 10);
+    var pct = target > 0 ? Math.round((actual / target) * 100) : 0;
+
+    g.addEventListener('mousemove', function(e) {
+      var rect = wrap.getBoundingClientRect();
+      var x = e.clientX - rect.left;
+      var y = e.clientY - rect.top;
+      tooltip.innerHTML =
+        '<div><b>' + label + '</b></div>' +
+        '<div class="tt-row"><span><span class="tt-dot" style="background:var(--series-actual)"></span>בפועל</span><b>' + fmt(actual) + '</b></div>' +
+        '<div class="tt-row"><span><span class="tt-dot" style="background:var(--series-target)"></span>מטרה</span><b>' + fmt(target) + '</b></div>' +
+        '<div class="tt-row"><span>ביצוע</span><b>' + pct + '%</b></div>';
+      tooltip.style.left = x + 'px';
+      tooltip.style.top = y + 'px';
+      tooltip.classList.add('visible');
+    });
+    g.addEventListener('mouseleave', function() {
+      tooltip.classList.remove('visible');
+    });
+  });
+})();
+</script>
+</body>
+</html>
